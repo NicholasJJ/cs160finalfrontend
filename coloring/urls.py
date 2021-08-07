@@ -1,14 +1,11 @@
 from django.urls import path
 from . import views
-from . import BackendMySQL
 
 urlpatterns = [
+    path('demo', views.demo, name='demo'),
+    path('new_interaction', views.new_interaction, name='new_interaction'),
+    path('home', views.home, name='home'),
+    path('drawPad', views.drawPad, name='drawPad'),
     path('gallery', views.gallery, name='gallery'),
-    path('testwrite', views.testwrite, name='testwrite'),
-    path('index', views.index, name='index'),
-    path('test_api', BackendMySQL.test_api, name='test_api'),
-    path('login', BackendMySQL.login, name='login'),
-    path('register', BackendMySQL.register, name='register'),
-    path('uploadText', BackendMySQL.uploadText, name = "uploadText"),
-    path('getText', BackendMySQL.getText, name = "getText"),
+    path('colorPicker', views.colorPicker, name='colorPicker')
 ]
