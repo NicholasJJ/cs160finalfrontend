@@ -1,0 +1,175 @@
+/* draw pad */
+
+.padButton {
+    background-color: #ffDDD2;
+    color: black;
+    border-width: .3vh;
+    border-style: solid;
+    border-color: black;
+    font-size: 5vh;
+    font-weight: 900;
+    text-align: center;
+    line-height: 16.6vw;
+}
+
+.padIcon {
+    height: 50px;
+}
+
+#psheet {
+    position: absolute;
+    top: 11vh;
+    left: 4vw;
+    height: 75vh;
+    width: 92vw;
+    background-color: #fdfcdc;
+    transform: rotate(-2.1deg);
+}
+
+.icon {
+    position: relative;
+    padding-top: 5vh;
+}
+
+#undoButton {
+    color: rgba(0, 0, 0, .5);
+}
+
+#redoButton {
+    color: rgba(0, 0, 0, .5);
+}
+
+.colorButton {
+    color: black;
+    text-shadow: -2px -2px 0 #FFF, 2px -2px 0 #FFF, -2px 2px 0 #FFF, 2px 2px 0 #FFF;
+    border-width: .3vh;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+    font-size: 5.5vw;
+    line-height: 16.6vw;
+}
+
+#newPage {
+    position: relative;
+    background-color: #fdfcdc;
+    border-color: #fdfcdc;
+    top: -74.7vh;
+    left: 79.55vw;
+    /* left: 0; */
+    height: 7vh;
+    width: 7vh;
+    padding-top: 0;
+    margin-top: 0;
+    margin-right: 0;
+    border-width: .5vh;
+    border-style: groove;
+    text-align: center;
+    font-size: 6vh;
+    line-height: 4vh;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* home screen */
+
+#startPaper {
+    width: 80%;
+    height: 95%;
+    margin: auto;
+    background: #006d77;
+    border: 2px solid #b19c7b;
+    box-sizing: border-box;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
+    transform: rotate(-4.1deg);
+}
+
+#paperInterior {
+    color: #fdfcdc;
+    text-decoration: none;
+    background-color: none;
+    transform: rotate(4.1deg);
+    margin: auto;
+    text-align: center;
+    font-size: 16vw;
+    padding-top: 4.5vh;
+    text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+#startButton {
+    background: #006d77;
+}
+
+#galleryButton {
+    border-color: #b19c7b;
+    border-style: solid;
+    border-width: .3vh;
+    font-size: 16vw;
+    text-align: center;
+}
+
+
+/* gallery */
+
+.postItPic {
+    /* background-color: #fbfbdb; */
+    border-bottom-style: dashed;
+    border-bottom-width: .3vh;
+}
+
+.postItTime {
+    text-align: center;
+    font-size: 3vh;
+}
+
+.picbtn {
+    background-color: #FFF384;
+    border-style: solid;
+    border-left-color: #FFF384;
+    border-top-color: #FFF384;
+    border-right-color: #006d77;
+    border-bottom-color: #006d77;
+    border-width: .3vh;
+    height: 25vh;
+    width: 25vh;
+    box-shadow: .5vh 1.5vh rgba(0, 0, 0, .5);
+}

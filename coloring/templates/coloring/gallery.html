@@ -1,0 +1,346 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>P3 Coloring</title>
+	<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'coloring/vendors/bootstrap/css/bootstrap.css' %}" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+
+<!-- Hello! -->
+	<style type="text/css">
+		#color-palette {
+			width: 300px;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: absolute;
+			top: 0;
+		}
+
+		.swatch {
+			width: 24px;
+			height: 24px;
+			-moz-border-radius: 12px;
+			-webkit-border-radius: 12px;
+			border-radius: 12px;
+			margin: 3px;
+		}
+
+		#myCanvas {
+			padding-left: 0;
+		    padding-right: 0;
+		    margin-left: auto;
+		    margin-right: auto;
+		    display: block;
+		}
+
+		#GalleryTitle {
+			width: 500 px;
+			height: 200 px;
+			background: #E29578;
+		}
+
+		#titlePlate {
+			background: #E29578;
+		}
+
+		.galleryImage {
+			width: 550px;
+			height: 550px;
+			background: #f1f1f1;
+			padding: 5px;
+			margin: 10px 10px 10px 10px;
+			border: 5px solid #000000;
+		}
+
+		.galleryDate {
+			width: 450px;
+			height: 75px;
+			background: #f1f1f1;
+			padding: 5px;
+			margin: -14px 10px 0px 10px;
+			border: 5px solid #000000;	
+		}
+
+		/* The Modal (background) */
+		.modal {
+    	display: none;
+    	/* Hidden by default */
+    	position: fixed;
+    	/* Stay in place */
+    	z-index: 1;
+    	/* Sit on top */
+    	left: 0;
+    	top: 0;
+    	width: 100%;
+    	/* Full width */
+    	height: 100%;
+    	/* Full height */
+    	overflow: auto;
+    	/* Enable scroll if needed */
+    	background-color: fbfbdb;
+    	/* Fallback color */
+    	background-color: rgba(251, 251, 219, 0.4);
+    	/* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+    		background-color: #fbfbdb;
+    		margin: 15% auto;
+    		/* 15% from the top and centered */
+    		border: 1px solid #888;
+    		width: 80%;
+		}
+
+		/* The Close Button */
+		.close {
+    		color: #aaaaaa;
+    		float: right;
+    		font-size: 28px;
+    		font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+    		color: #000;
+    		text-decoration: none;
+    		cursor: pointer;
+		}
+	</style>
+	<script>
+		
+		window.onload = function() {
+		// localStorage.clear();
+		// sessionStorage.clear();
+		// localStorage.setItem("savedPics", JSON.stringify([]));
+		// localStorage.setItem("savedDates", JSON.stringify([]));
+		var savedPics = JSON.parse(localStorage.getItem("savedPics"));
+		var savedDates = JSON.parse(localStorage.getItem("savedDates"));
+		var postItCanvases = [];
+		var postItScopes = [];
+		for (var i = savedPics.length - 1; i >= 0; i--){
+			var name = ""
+			try{
+				name = savedDates[i];
+			} catch {
+				name = "item " + i;
+			}
+			createPostIt(i, savedPics[i], name);
+		}
+
+		function createPostIt(id, picture, timeText) {
+			var parent = document.getElementById("postIts");
+			var newDiv = document.createElement("div");
+			newDiv.setAttribute("class", 'col-5');
+			newDiv.setAttribute("style", "height: 25vh; margin: 30px");
+			var btn = document.createElement("button");
+			btn.setAttribute("class", 'picbtn');
+			btn.setAttribute("style", "transform: rotate(" + (Math.random() - .5) * 7 + "deg)"); //Let's Gooooooo
+			// btn.setAttribute("style", "Background-color: #fbfbdb; border-style: solid");
+			
+			//Image setup
+			var img = document.createElement("canvas");
+			img.setAttribute("id", id);
+			img.setAttribute("width", "1000px");
+			img.setAttribute("height", "1000px");
+			img.setAttribute("class", "postItPic");
+			var s = new paper.PaperScope();
+			s.setup(img);
+			s.activate();
+			with(paper){
+				project.activeLayer.removeChildren();
+				project.importJSON(picture);
+			}
+			
+			postItScopes.push(s);
+			postItCanvases.push(img);
+
+			btn.appendChild(img);
+
+			// Time Setup
+			var time = document.createElement("div");
+			time.setAttribute("class", "postItTime");
+			time.appendChild(document.createTextNode(timeText));
+			btn.appendChild(time);
+
+			newDiv.appendChild(btn);
+
+			//Modal
+			var mod = document.createElement("div");
+			mod.setAttribute("class", "modal");
+			var modContent = document.createElement("div");
+			modContent.setAttribute("class", "modal-content");
+			modContent.setAttribute("style", "width: 90%; padding: 0 0 0 0");
+				var modContainer = document.createElement("div");
+				modContainer.setAttribute("class", "container-fluid");
+				modContainer.setAttribute("style", "border-style: solid; border-width: .3vh;");
+					var r1 = document.createElement("div");
+					r1.setAttribute("class", "row");
+					r1.setAttribute("style", "font-size: 5vh; border-bottom-style: solid; border-width: .3vh; background: #ffddd2");
+						var col11 = document.createElement("div");
+						col11.setAttribute("class", "col-2");
+						col11.setAttribute("style", "border-right-style: solid; border-right-width: .3vh; text-align: center; background-color: lightgray;");
+						col11.appendChild(document.createTextNode("X"));
+						col11.onclick = function() {
+							mod.style.display = "none";
+						}
+						r1.appendChild(col11);
+						var col12 = document.createElement("div");
+						col12.setAttribute("class", "col-10");
+						col12.appendChild(document.createTextNode(timeText));
+						r1.appendChild(col12);
+					modContainer.appendChild(r1);
+					var r2 = document.createElement("div");
+						var imgb = document.createElement("canvas");
+						imgb.setAttribute("id", "2" + id);
+						imgb.setAttribute("width", "900px");
+						imgb.setAttribute("height", "1500px");
+						var s = new paper.PaperScope();
+						s.setup(imgb);
+						s.activate();
+						with(paper){
+							project.activeLayer.removeChildren();
+							project.importJSON(picture);
+						}
+						r2.appendChild(imgb);
+					r2.setAttribute("class", "row");
+					modContainer.appendChild(r2);
+				modContent.appendChild(modContainer);
+			mod.appendChild(modContent);
+			newDiv.appendChild(mod);
+
+			parent.appendChild(newDiv);
+
+			btn.onclick = function() {
+				console.log("hey");
+				mod.style.display = "block";
+			}
+			$("#" + id).css("width", "100%");
+			$("#" + id).css("height", "80%");
+			$("#2" + id).css("width", "100%");
+			$("#2" + id).css("height", "100%");
+		}
+	}
+	</script>
+</head>
+<!-- Wood Texture from https://www.freecreatives.com/textures/seamless-wood-textures.html -->
+<body style="background-image: url(./../static/coloring/images/woodWall.jpeg); background-size: 100% 100%; background-repeat: repeat-y;">
+	<div class="container-fluid">
+		<div class="row align-items-center" id = 'titlePlate' style = "border: 5px solid #907f9f;">
+			<div class="col-2">
+				<a href = '/coloring/home' style = "background-color: #006d77" class = 'btn btn-secondary d-flex justify-content-center' role = 'button' aria-pressed = 'true'>
+					<svg xmlns="http://www.w3.org/2000/svg" width="120" height="=120" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+  						<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+					</svg>
+				</a>
+			</div>
+			<div class="col-8 d-flex justify-content-center" style = "border-left: 5px solid #907f9f; border-right: 5px solid #907f9f;">
+				<h1 style = "font-size: 8rem; color: #006d77"> Gallery </h1>
+			</div>
+			<div class="col-2">
+				<a href = '/coloring/new_interaction' style = "background-color: #006d77" class = 'btn btn-secondary d-flex justify-content-center' role = 'button' aria-pressed = 'true'>
+					<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+  						<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+  						<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div id="m" class="container-fluid" style="height: 95vh;">
+		<div id="postIts" class = "row align-items-center" style = "height: 25vh;"> 
+			<!-- <div class = 'col-6 col-sm-6 d-flex justify-content-center'>
+					<button id = "myBtn1" class = 'btn btn-info galleryImage' style = 'background-image: url(./../static/coloring/images/GalleryImage1.jpeg); background-size: scale-down; background-position: center'>
+					</button>
+					<div id = 'myModal1' class = 'modal'>
+    					<div class="modal-content">
+							<div class="modal-header">
+        						<button type="button" class="close1" data-dismiss="modal" aria-label="Close">
+          						<span aria-hidden="true">&times;</span>
+        						</button>
+      						</div>
+      						<div class="modal-body d-flex justify-content-center">
+								<img class="img-fluid" src="{% static 'coloring/images/GalleryImage1.jpeg' %}" style = "width: 1000px">
+							</div>
+      					</div>
+    				</div>
+			</div>  -->
+			<!-- <div class = 'col-6 col-sm-6 d-flex justify-content-center'>
+				<button id = "myBtn2" class = 'btn btn-info galleryImage' style = 'background-image: url(./../static/coloring/images/GalleryImage2.jpeg); background-size: scale-down; background-position: center'>
+				</button>
+ 				<div id = 'myModal2' class = 'modal'>
+    				<div class="modal-content">
+						<div class="modal-header">
+        					<button type="button" class="close2" data-dismiss="modal" aria-label="Close">
+          					<span aria-hidden="true">&times;</span>
+        					</button>
+      					</div>
+      					<div class="modal-body d-flex justify-content-center">
+							<img class="img-fluid" src="{% static 'coloring/images/GalleryImage2.jpeg' %}" style = "width: 1000px">
+						</div>
+      				</div>
+    			</div>
+			</div>
+			<div class = "w-100 d-none d-md-block"></div>
+			<div class = "col-6 col-sm-6 d-flex justify-content-center">
+				<div class = "galleryDate" style = "background-color: 'grey'">
+				<h1 class = "d-flex justify-content-center"> 7-4-2021 </h1>
+				</div>
+			</div>
+			<div class = "col-6 col-sm-6 d-flex justify-content-center">
+				<div class = "galleryDate" style = "background-color: 'grey'">
+				<h1 class = "d-flex justify-content-center"> 6-23-2021 </h1>
+				</div>
+			</div> -->
+		</div>
+		
+	</div>
+	
+<script>
+	// Get modal
+	var modal1 = document.getElementById('myModal1');
+	var btn1 = document.getElementById("myBtn1");
+	var span1 = document.getElementsByClassName("close1")[0];
+	btn1.onclick = function() {
+    	modal1.style.display = "block";
+	}
+	span1.onclick = function() {
+    	modal1.style.display = "none";
+	}
+	// Get modal2
+	var modal2 = document.getElementById('myModal2');
+	var btn2 = document.getElementById("myBtn2");
+	var span2 = document.getElementsByClassName("close2")[0];
+	btn2.onclick = function() {
+    	modal2.style.display = "block";
+	}
+	span2.onclick = function() {
+    	modal2.style.display = "none";
+	}
+	// Get modal3
+	var modal3 = document.getElementById('myModal3');
+	var btn3 = document.getElementById("myBtn3");
+	var span3 = document.getElementsByClassName("close3")[0];
+	btn3.onclick = function() {
+    	modal3.style.display = "block";
+	}
+	span3.onclick = function() {
+    	modal3.style.display = "none";
+	}
+	window.onclick = function(event) {
+    	if (event.target == modal2 || event.target == modal1 || event.target == modal3) {
+        	modal1.style.display = "none";
+			modal2.style.display = "none";
+			modal3.style.display = "none";
+    	}
+	}
+	
+</script>
+</body>
+</html>
