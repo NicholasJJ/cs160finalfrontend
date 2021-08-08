@@ -5,3 +5,6 @@ def gallery(request):
 
 def testwrite(request):
     return render(request, 'coloring/testwrite.html')
+
+def landing(request):
+    return render(request, 'coloring/landing.html')
