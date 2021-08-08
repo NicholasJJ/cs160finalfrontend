@@ -1,0 +1,146 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Preview Story</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Mulish&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style type="text/css">
+
+      /* Wood texture background image source: ArtStation (image by Martin Novák) - https://www.artstation.com/artwork/yrNwn
+      (Edited in Figma) */
+      html, body {
+        background-image: url("/static/images/wood-texture.png");
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      input {
+        border-radius: 10px;
+      }
+
+			h1 {
+        font-family: "Raleway";
+        font-size: 26px;
+        font-weight: 500;
+        color: #1b1211;
+      }
+
+      h2 {
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+      }
+
+			button {
+				background-color: #b9b9ae;
+				border: 1px solid #4e643e;
+				border-radius: 2px;
+				padding-top: 6px;
+				padding-bottom: 2px;
+				width: 750px;
+				text-align: center;
+			}
+
+			.label-bar {
+				margin-top: -50px;
+				text-align: center;
+				width: 100%;
+				background-color: #d0d6ca;
+				box-shadow: 0 2px 6px -1px #b2b8ad;
+			}
+
+      #top-bar {
+        width: 100%;
+        background-color: #d0d6ca;
+
+      }
+
+			.labels {
+				padding-top: 3px;
+				padding-bottom: 2px;
+				text-align: center;
+				display: inline-block;
+				margin-bottom: 7px;
+			}
+
+      #back {
+        width: 32px;
+        height: 32px;
+        margin-top: 18px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        opacity: 0.7;
+				background-color: #b2b8ad;
+      }
+
+			#story {
+				overflow: auto;
+        width: 750px;
+        height: 780px;
+        background-color: #f2f0ed;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        margin-left: 50px;
+        margin: 0 auto;
+        padding-top: 42px;
+        padding-left: 52px;
+        padding-right: 52px;
+        padding-bottom: 42px;
+        text-align: left;
+			}
+
+			#button-bar {
+				margin-top: 10px;
+				padding-bottom: 25px;
+				text-align: center;
+			}
+
+			#scroll-top {
+        text-align: center;
+        margin-top: 25px;
+      }
+
+
+
+    </style>
+  </head>
+
+  <body>
+		<div id="top-bar">
+			<!-- Back icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aarrow_back%3A -->
+			<input type="image" id="back" src="/static/images/arrow_back_black_48dp.svg"></input>
+		</div>
+		<div class="label-bar">
+		 <div class="labels" id="title"><h1> Language &nbsp&nbsp/&nbsp&nbsp Genre </h1></div>
+		</div>
+		<div id="scroll-top">
+			<img src="/static/images/scroll-top.png" width="832px" height="38px">
+			<div id="story"></div>
+			</div>
+		<div id="button-bar"><button id="continue"><h2>Continue Story</h2></button></div>
+  </body>
+
+  <script>
+
+	$("#back").click(function(){
+			location.href = "genre";
+	});
+
+	$("#continue").click(function(){
+			location.href = "add_story";
+	});
+
+  </script>
+  </html>

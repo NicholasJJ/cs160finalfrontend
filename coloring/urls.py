@@ -20,5 +20,6 @@ urlpatterns = [
     path('getText', BackendMySQL.getText, name = "getText"),
     path('getTokenByInfo', BackendMySQL.getTokenByInfo, name = "getTokenByInfo"),
     path('getTokenGallery', BackendMySQL.getTokenGallery, name = "getTokenGallery"),
-    path('index', views.index, name='index')
+    path('index', views.index, name='index'),
+    path('language', views.language, name='language')
 ]
