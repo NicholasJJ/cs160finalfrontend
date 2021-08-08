@@ -11,4 +11,5 @@ urlpatterns = [
     path('landing', views.landing, name='landing'),
     path('genre', views.genre, name='genre'),
     path('instructions', views.instructions, name='instructions'),
+    path('language', views.language, name='language')
 ]

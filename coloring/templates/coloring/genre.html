@@ -11,7 +11,7 @@
 
 	<script src="{% static '/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static '/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
-	
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
         color: #1B1211;
         text-align: center;
     }
-    
+
     button {
         background-color: #7e695a;
         opacity: 0.58;
@@ -64,7 +64,7 @@
         width: 40%;
         overflow-y:auto;
     }
-    
+
     #genreBtn {
         width: 30vw;
         height: 10vh;
@@ -100,10 +100,10 @@
             <div class="cell" style="background-image: url(./../static/images/bookshelf_right.png)">
             </div>
         </div>
-        
-        
+
+
 	</div>
-    
+
 </body>
 
 <script>
@@ -112,7 +112,7 @@
     });
 
     var allGenre = ["Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror", "Mystery", "Romance", "Satire", "Science Fiction", "Speculative", "Thriller", "Western", "Other"]
-    
+
     window.onload = function(event) {
 		addGenre();
 	}
@@ -134,7 +134,7 @@
 
             var genreName = document.createElement("p");
             genreName.setAttribute("style", "font-family: Mulish; font-size: 4vh; color: #F2F0ED");
-            
+
             var text = document.createTextNode(allGenre[i]);
             genreName.appendChild(text);
 

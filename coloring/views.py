@@ -20,9 +20,12 @@ def testwrite(request):
 
 def landing(request):
     return render(request, 'coloring/landing.html')
-    
+
 def genre(request):
     return render(request, 'coloring/genre.html')
 
 def instructions(request):
     return render(request, 'coloring/instructions.html')
+
+def language(request):
+    return render(request, 'coloring/language.html')
