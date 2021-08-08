@@ -10,7 +10,7 @@
 		body {
 			background-image: url(./../static/images/bookshelf.png);
 			background-repeat: repeat;
-			background-size: 100px;
+			background-size: 16vw;
 		}
 		.parallax{
 			/* height: 50vh;
@@ -28,15 +28,15 @@
 		}
 		.fbook{
 
-			height: 120vh;
+			height: 80vh;
 			width: 130vw;
-			background-image: url(./../static/images/shelf.png);
+			background-image: url(./../static/images/shelfcolor.png);
 			background-size: 100% 100%;
 		}
 		.mbook{
 			height: 50vh;
-			width: 200vw;
-			background-image: url(./../static/images/hshelf.png);
+			width: 160vw;
+			background-image: url(./../static/images/nshelfcolor.png);
 
 			background-size: 100% 100%;
 			margin-bottom: 20vh;
@@ -44,31 +44,31 @@
 		.bbook{
 			height: 30vh;
 			width: 60vw;
-			background-image: url(./../static/images/stairs.png);
+			background-image: url(./../static/images/stairscolor.png);
 			background-size: 100% 100%;
 			margin-bottom: 10vh;
 		}
 		.scroll{
 			position: relative;
-			background-image: url(./../static/images/book.png);
+			background-image: url(./../static/images/bookcolor.png);
 			background-size: 100% 100%;
 			float: left;
 			pointer-events: auto;
 		}
 		.scroll:hover{
-			background-image: url(./../static/images/bookHighlight.png);
+			background-image: url(./../static/images/bookopencolor6.png);
 		}
 		#header{
 			width: 100%;
 			height: 10vh;
 			background-color: #D0D6CA;
-			border-bottom: solid black;
 		}
 		#homebtn{
-			margin-top: 2.5%;
-			margin-left: 2.5%;
-			width: 80%;
-			height: 80%;
+			position: absolute;
+			top: 50%;
+			transform: translate(1vw,-50%);
+			width: 7vh;
+			height: 7vh;
 			background-color: transparent;
 			border: none;
 			background-image: url(./../static/images/home.png);
@@ -96,16 +96,14 @@
 	</div>
 	<div class="containter-fluid">
 		<div id="header" class="row" style="margin: 0 0 0 0">
-			<div class="col-1" style="padding: 0 0 0 0">
-				<button id="homebtn"></button>
+			<div class="col-1" style="padding: 0 0 0 0;">
+				<button id="homebtn" onclick="location.href = 'landing'"></button>
 			</div>
 			<div class="col-3"></div>
 			<div class="col-4">
 				<div style="text-align:center; margin: auto; font-size: 6.5vh;">Gallery</div>
-				
 			</div>
 			<div class="col-4"></div>
-			
 		</div>
 	</div>
 	
@@ -149,7 +147,7 @@
 		// console.log(lowestF - h + foregroundChange);
 		if (lowestF - h + foregroundChange < 20) {
 			//make new foreground book
-			marginBot = "80vh"
+			marginBot = "200vh"
 			newShelf(marginBot,f);
 			lowestF += $(".fbook").height() + parseInt(marginBot)
 		}
@@ -182,9 +180,10 @@
 		i -= 10
 		t = $(newDiv).css("transform") + " rotate(" + i.toString() + "deg)"
 		$(newDiv).css("transform", t);
-		placeScroll(newDiv,"40%","20%","10vw","0");
-		placeScroll(newDiv,"40%","20%","25vw","0");
-		placeScroll(newDiv,"40%","20%","40vw","0");
+		placeScroll(newDiv,"55%","10%","15vw","-15%");
+		placeScroll(newDiv,"55%","10%","30vw","-15%");
+		placeScroll(newDiv,"55%","10%","45vw","-15%");
+		placeScroll(newDiv,"55%","10%","60vw","-15%");
 		parent.appendChild(newDiv);
 		
 	}
@@ -193,12 +192,12 @@
 	function newHangingShelf(){
 		var newDiv = document.createElement("div")
 		newDiv.setAttribute("class", "mbook")
-		i = Math.random() * 32
-		i -= 44
+		i = Math.random() * 24
+		i -= 40
 		console.log(i);
 		t = $(newDiv).css("transform") + " translate(" + i.toString() + "% ,0)"
 		$(newDiv).css("transform", t);
-		placeScroll(newDiv,"40%","5%","49%","45%")
+		placeScroll(newDiv,"55%","5%","49%","28.5%")
 		m.appendChild(newDiv);
 		lowestM += $(".mbook").height() + parseInt($(".mbook").css("margin-bottom"))
 	}
@@ -213,7 +212,7 @@
 		i = Math.random() * -70
 		t = $(newDiv).css("transform") + " translate(" + i.toString() + "% ,0)"
 		$(newDiv).css("transform", t);
-		placeScroll(newDiv,"30%","5%","75%","-6%")
+		placeScroll(newDiv,"33%","5%","75%","-9%")
 		b.appendChild(newDiv);
 		lowestB += $(".bbook").height() + parseInt($(".bbook").css("margin-bottom"));
 	}

@@ -9,5 +9,6 @@ urlpatterns = [
     path('view_book', views.view_book, name='view_book'),
     path('testwrite', views.testwrite, name='testwrite'),
     path('landing', views.landing, name='landing'),
-    path('genre', views.genre, name='genre')
+    path('genre', views.genre, name='genre'),
+    path('instructions', views.instructions, name='instructions'),
 ]
