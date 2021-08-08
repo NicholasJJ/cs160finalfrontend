@@ -17,5 +17,6 @@ urlpatterns = [
     path('register', BackendMySQL.register, name='register'),
     path('uploadText', BackendMySQL.uploadText, name = "uploadText"),
     path('getText', BackendMySQL.getText, name = "getText"),
-    path('index', views.index, name='index')
+    path('index', views.index, name='index'),
+    path('language', views.language, name='language')
 ]

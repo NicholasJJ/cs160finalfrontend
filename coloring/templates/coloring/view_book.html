@@ -1,0 +1,270 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>View Story</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Mulish&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style type="text/css">
+
+      /* Wood texture background image source: ArtStation (image by Martin Novák) - https://www.artstation.com/artwork/yrNwn
+      (Edited in Figma) */
+      html, body {
+        background-image: url("/static/images/wood-texture.png");
+        height: 100%;
+        background-repeat: repeat-y;
+        background-position: center;
+        background-size: cover;
+      }
+
+      input {
+        border-radius: 10px;
+      }
+
+			h1 {
+        font-family: "Raleway";
+        font-size: 26px;
+        font-weight: 500;
+        color: #1b1211;
+      }
+
+      h2 {
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+      }
+
+      h3 {
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+        margin-left: 65px;
+        margin-top: 12px;
+      }
+
+      h4 {
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+        display: inline-block;
+        margin-left: 10px;
+
+      }
+
+			button {
+				background-color: #b9b9ae;
+				border: 1px solid #4e643e;
+				border-radius: 2px;
+				padding-top: 6px;
+				padding-bottom: 2px;
+				width: 678px;
+				text-align: center;
+			}
+
+			.label-bar {
+				margin-top: -50px;
+				text-align: center;
+				width: 100%;
+				background-color: #d0d6ca;
+				box-shadow: 0 2px 6px -1px #b2b8ad;
+			}
+
+      #top-bar {
+        width: 100%;
+        background-color: #d0d6ca;
+
+      }
+
+			.labels {
+				padding-top: 3px;
+				padding-bottom: 2px;
+				text-align: center;
+				display: inline-block;
+				margin-bottom: 7px;
+			}
+
+      #back {
+        width: 32px;
+        height: 32px;
+        margin-top: 18px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        opacity: 0.7;
+				background-color: #b2b8ad;
+      }
+
+			#story {
+        width: 750px;
+        height: auto;
+        background-color: #f2f0ed;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        margin-left: 50px;
+        margin: 0 auto;
+        padding-top: 42px;
+        padding-left: 52px;
+        padding-right: 52px;
+        padding-bottom: 42px;
+        text-align: left;
+			}
+
+			#content {
+				position: absolute;
+				overflow: auto;
+				z-index: 2;
+				margin-top: 76px;
+				margin-left: 115px;
+				width: 610px;
+				height: 590px;
+			}
+
+			#button-bar {
+				margin-top: 2px;
+				padding-bottom: 9px;
+				text-align: center;
+			}
+
+      #scroll-top {
+        text-align: center;
+        margin-top: 25px;
+        padding-bottom: 25px;
+      }
+
+      #header {
+        margin-left: 150px;
+      }
+
+      #footer {
+        padding-bottom: 50px;
+      }
+
+      #contributors {
+        width: 80%;
+        height: auto;
+        background-color: #e6dfd5;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        margin-left: 50px;
+        margin: 0 auto;
+        padding-top: 42px;
+        padding-left: 52px;
+        padding-right: 52px;
+        padding-bottom: 42px;
+        text-align: left;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+      }
+
+      .modal-content {
+        background-color: #efefee;
+        margin: 10% auto;
+        border: 1px solid #bdb4b1;
+        width: 50%;
+        padding-bottom: 18px;
+      }
+
+      #close {
+        width: 32px;
+        height: 32px;
+        margin-top: 18px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        opacity: 0.7;
+        background-color: #b2b8ad;
+      }
+
+      #summary-title {
+        text-align: center;
+      }
+
+      #summary-box {
+        overflow: auto;
+        width: 85%;
+        height: 368px;
+        background-color: #f2f0ed;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        padding: 24px;
+      }
+
+      #modal-bar {
+        margin-bottom: -20px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+		<div id="top-bar">
+			<!-- Back icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aarrow_back%3A -->
+			<input type="image" id="back" src="/static/images/arrow_back_black_48dp.svg"></input>
+		</div>
+		<div class="label-bar">
+		 <div id="button-bar"><button id="summary"><h2>View Summary</h2></button></div>
+		</div>
+    <div id="scroll-top">
+      <img src="/static/images/scroll-top.png" width="832px" height="38px">
+      <div id="story"></div>
+      </div>
+      <div id="header"><h2>Contributors</h2></div>
+      <div id="footer">
+      <div id="contributors"></div>
+      </div>
+
+      <div class="modal" id="confirmation">
+        <div class="modal-content">
+        <div id="modal-bar">
+          <!-- Close icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aclose%3A -->
+          <input type="image" id="close" src="/static/images/close_black_48dp.svg"></input>
+         </div>
+         <div id="summary-title">
+          <h2> Summary </h2>
+          </div>
+          <div id="summary-box"></div>
+      </div>
+    </div>
+
+  </body>
+
+  <script>
+
+  var modal = document.getElementById("confirmation");
+
+  $("#back").click(function(){
+      location.href = "gallery";
+  });
+
+  $("#summary").click(function(){
+      modal.style.display = "block";
+  });
+
+  $("#close").click(function(){
+      modal.style.display = "none";
+  });
+
+  </script>
+  </html>
