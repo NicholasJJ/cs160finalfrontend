@@ -153,7 +153,7 @@
 
       </div>
       <div class="w-25 py-5">
-        <div class="select-button">Choose Genre</div>
+        <div id = "genre" class="select-button">Choose Genre</div>
         <div class="my-5">
           <h3 id="top-box">Russian</h3>
           <h3 id="mid-box">Привет</h3>
@@ -166,7 +166,11 @@
 </body>
 <script>
   $("#icon-return").click(function(){
-      location.href = "";
+      location.href = "landing";
+  });
+
+  $("#genre").click(function(){
+      location.href = "genre";
   });
 
   const allLanguages = new Map([
