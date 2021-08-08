@@ -17,3 +17,6 @@ def view_book(request):
     
 def testwrite(request):
     return render(request, 'coloring/testwrite.html')
+
+def genre(request):
+    return render(request, 'coloring/genre.html')
