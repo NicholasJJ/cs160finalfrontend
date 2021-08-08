@@ -24,27 +24,30 @@
             });
         }
 
-        function uploadText(filename, accessToken, text) {
+        function uploadText(LastPart_Language, Genre, Name_Of_Writters, Story_Content, Story_Summary) {
+            var Name_Of_Writters_Str = ""
+            for (const v of Name_Of_Writters) {
+                Name_Of_Writters_Str += String(v) + "."
+            }
+            Name_Of_Writters_Str = Name_Of_Writters_Str.substring(0, Name_Of_Writters_Str.length - 1)
             var settings = {
                 "url": "http://localhost:8000/coloring/uploadText",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {
-                    "fileName": filename,
-                    "accessToken": accessToken,
-                    "fileContent": text
+                "LastPart_Language": LastPart_Language,
+                "Genre": Genre,
+                "Name_Of_Writters": Name_Of_Writters_Str,
+                "Story_Content": Story_Content,
+                "Story_Summary": Story_Summary
                 }
             };
-
+            
             $.ajax(settings).done(function (response) {
-                if (response.result == 0) {
-                    alert("Add Success, try to download that")
-                } else {
-                    alert("Add Failed : " + response.msg)
-                }
+                console.log(response);
             });
         }
 
@@ -120,9 +123,10 @@
     }
     );
     $("#uploadText").click(function () {
-        var filename = $("#textName").val()
-        var content = $("#textContent").val()
-        uploadText(filename, accessToken, content)
+        // var filename = $("#textName").val()
+        // var content = $("#textContent").val()
+        // uploadText(filename, accessToken, content)
+        uploadText("Chinese", "Trash", ["Cat", "Dog", "Frog"], "Genshin Impact GOAT", "MiHoYo")
     }
     );
     $("#getText").click(function () {
