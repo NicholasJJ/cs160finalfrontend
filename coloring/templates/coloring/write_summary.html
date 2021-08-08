@@ -1,0 +1,400 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Summary Editor</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  	<script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+  	<!-- Theme included stylesheets -->
+  	<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  	<link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Mulish&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style type="text/css">
+
+      /* Wood texture background image source: ArtStation (image by Martin Novák) - https://www.artstation.com/artwork/yrNwn
+      (Edited in Figma) */
+      html, body {
+        background-image: url("/static/images/wood-texture.png");
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      input[type="image"] {
+        border-radius: 10px;
+      }
+
+      h1 {
+        font-family: "Raleway";
+        font-size: 26px;
+        font-weight: 500;
+        color: #1b1211;
+      }
+
+      h2 {
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+      }
+
+      h3 {
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+        margin-left: 65px;
+        margin-top: 12px;
+      }
+
+      h4 {
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+        display: inline-block;
+        margin-left: 10px;
+
+      }
+
+      p {
+        font-family: "Mulish";
+        font-size: 16px;
+        font-weight: 400;
+        color: #4f4f4f;
+      }
+
+			button {
+				background-color: #b9b9ae;
+				border: 1px solid #4e643e;
+				border-radius: 2px;
+				padding-top: 6px;
+				padding-bottom: 2px;
+				width: 100%;
+				text-align: center;
+			}
+
+			.label-bar {
+				margin-top: -50px;
+				text-align: center;
+				width: 100%;
+				background-color: #d0d6ca;
+				box-shadow: 0 2px 6px -1px #b2b8ad;
+			}
+
+      #top-bar {
+        width: 100%;
+        background-color: #d0d6ca;
+
+      }
+
+			.labels {
+				padding-top: 3px;
+				padding-bottom: 2px;
+				text-align: center;
+				display: inline-block;
+				margin-bottom: 7px;
+			}
+
+      #back {
+        width: 32px;
+        height: 32px;
+        margin-top: 18px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        opacity: 0.7;
+				background-color: #b2b8ad;
+      }
+
+      #story {
+				overflow: auto;
+        width: 470px;
+        height: 770px;
+        background-color: #f2f0ed;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        margin-left: 50px;
+        margin: 0 auto;
+        padding-top: 42px;
+        padding-left: 52px;
+        padding-right: 52px;
+        padding-bottom: 42px;
+        text-align: left;
+			}
+
+			.container-fluid {
+        height: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      .row-fluid {
+        height: 100%;
+      }
+
+      #left {
+        width: 39.2%;
+        border-right: 1px solid #5a4442;
+      }
+
+      #right {
+        width: 60.4%;
+        border-left: 1px solid #5a4442;
+      }
+
+      #header {
+        margin-top: 40px;
+        margin-bottom: 10px;
+        margin-left: 50px;
+      }
+
+      #summary-box {
+        overflow: auto;
+        width: 90%;
+        height: 224px;
+        background-color: #f2f0ed;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        margin-left: 50px;
+        padding: 30px;
+      }
+
+      #line {
+        width: 100%;
+        height: 1%;
+        margin-top: 30px;
+        border-top: 1px solid #5a4442;
+        border-bottom: 1px solid #5a4442;
+      }
+
+      #wrapper {
+        width: 90%;
+        height: 46.25%;
+        margin-top: 30px;
+        margin-left: 50px;
+        background-color: #f2f0ed;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+      }
+
+      #editor {
+        height: 90%;
+      }
+
+      #button-bar {
+				margin-top: 6px;
+				padding-bottom: 25px;
+				text-align: center;
+			}
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+      }
+
+      .modal-content {
+        background-color: #efefee;
+        margin: 10% auto;
+        border: 1px solid #bdb4b1;
+        width: 50%;
+        padding-bottom: 18px;
+      }
+
+      #close {
+        width: 32px;
+        height: 32px;
+        margin-top: 18px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        opacity: 0.7;
+				background-color: #b2b8ad;
+      }
+
+      .modal-text {
+        background-color: #f2f0ed;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        width: 82%;
+        height: 44px;
+        margin-left: 75px;
+        padding-left: 15px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border: 2px solid #5a4442;;
+      }
+
+      #modal-button-bar {
+        width: 100%;
+        margin-top: 15px;
+				padding-bottom: 25px;
+				text-align: center;
+      }
+
+      #submit {
+        width: 70%;
+        background-color: #b9b9ae;
+				border: 1px solid #4e643e;
+				border-radius: 2px;
+				padding-top: 8px;
+				padding-bottom: 6px;
+				text-align: center;
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+      }
+
+      .radio {
+        background-color: #f6f6f6;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        width: 28px;
+        height: 28px;
+        margin-left: 75px;
+        padding-left: 15px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+
+      input[type="radio"]{
+        vertical-align: middle;
+      }
+
+      #scroll-top {
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      #scroll-2 {
+        margin-bottom: 25px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+  		<div id="top-bar">
+  			<!-- Back icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aarrow_back%3A -->
+  			<input type="image" id="back" src="/static/images/arrow_back_black_48dp.svg"></input>
+  		</div>
+  		<div class="label-bar">
+  		 <div class="labels" id="title"><h1> Translate and Write Summary </h1></div>
+  		</div>
+        <div class="row-fluid d-flex justify-content-between">
+          <div class="col-xs-6" id="left">
+            <div id="scroll-top">
+        			<img src="/static/images/scroll-top.png" width="518px" height="40px">
+        			<div id="story"></div>
+              <img id="scroll-2" src="/static/images/scroll-top.png" width="518px" height="40px">
+        			</div>
+          </div>
+          <div class="col-xs-6" id="right">
+            <div id="header"><h2>Summary</h2></div>
+        		<div id="summary-box"></div>
+            <div id="line"></div>
+            <div id="wrapper">
+            <div id="editor"><p>Write your summary by replacing this text</p></div>
+            <div id="button-bar"><button id="save"><h2>Save Summary</h2></button></div>
+            </div>
+
+          <div class="modal" id="confirmation">
+            <div class="modal-content">
+            <div id="modal-bar">
+              <!-- Close icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aclose%3A -->
+              <input type="image" id="close" src="/static/images/close_black_48dp.svg"></input>
+      		   </div>
+            <form onsubmit="return false">
+              <h3> Language of Added Section: </h3>
+              <input type="text" class="modal-text" id="lang" name="lang"></input>
+              <h3> Did you end the story? </h3>
+              <label for="yes">
+                <input type="radio" class="radio" id="yes" name="end" value="Yes"><h4>Yes</h4>
+              </label>
+                <label for="no">
+                <input type="radio" class="radio" id="no" name="end" value="No"><h4>No</h4>
+              </label>
+              <h3> (Optional) Your Name: </h3>
+              <input type="text" class="modal-text" id="name" name="name"></input>
+              <div id="modal-button-bar">
+                <input type="submit" id="submit" value="Sumbit Story">
+              </div>
+            </form>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var Toolbar = Quill.import('modules/toolbar');
+    var toolbarOptions = [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+
+      ['clean']                                         // remove formatting button
+    ];
+    var container = document.getElementById('editor');
+    var editor = new Quill(container, {
+                  modules: {
+                    toolbar: toolbarOptions
+                  },
+                  theme: 'snow'
+                });
+
+
+    function repeat() {
+      var h = editor.root.innerHTML;
+      paste = document.getElementById("paste");
+      paste.innerHTML = h;
+    }
+
+    var modal = document.getElementById("confirmation");
+
+    $("#back").click(function(){
+  			location.href = "add_story";
+  	});
+
+  	$("#save").click(function(){
+  			modal.style.display = "block";
+  	});
+
+    $("#close").click(function(){
+  			modal.style.display = "none";
+  	});
+
+    $("#submit").click(function(){
+  			location.href = "landing";
+  	});
+  </script>
+  </html>
