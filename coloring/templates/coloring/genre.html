@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Museum Display</title>
+    <title>Genre</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
@@ -72,70 +72,25 @@
 </head>
 
 <body>
-  <div id="top-bar">
-    <h1> Collaborative Museum </h1>
-  </div>
-  <div class="container-fluid">
-    <div class="row-fluid justify-content-center">
+    <div class="containter-fluid">
+		<div id="header" class="row" style="margin: 0 0 0 0">
+			<div class="col-1" style="padding: 0 0 0 0">
+				<button id="homebtn"></button>
+			</div>
+			<div class="col-3"></div>
+			<div class="col-4">
+				<div style="text-align:center; margin: auto; font-size: 3.5vh;">Choose Genre</div>
+			</div>
+			<div class="col-4"></div>
+		</div>
+	</div>
+        <div class="row-fluid justify-content-center">
+        </div>
     </div>
-  </div>
 </body>
 
 <script>
-        //localStorage.clear();
-        //sessionStorage.clear();
-    var savedPics;
-    var id;
-    var artwork;
-    var myCardDisplay = document.getElementById('myCard');
 
-    window.onload = function() {
-		  savedFinals = JSON.parse(localStorage.getItem("savedFinals"));
-      savedHeadings = JSON.parse(localStorage.getItem("savedHeadings"));
-      var artwork;
-      for (var i = 0; i <= savedFinals.length - 1; i++) {
-          addRoomToDisplay(savedFinals[i], savedHeadings[i]);
-      }
-    }
-
-    //initialize the websocket
-    var rooms = {};
-    var socket = new WebSocket(
-        'wss://' + window.location.host + '/ws/draw');
-
-    // Add code here if you want to pass any other information.
-    var received;
-    socket.onmessage = function(receivedMessage) {
-        received = JSON.parse(receivedMessage.data);
-        console.log("Received: " + JSON.stringify(received));
-        // Display all users' artwork
-        var themedRoom = received["display"];
-        var theme = received["theme"]
-        if (themedRoom) {
-            if ((themedRoom in rooms) == false) {
-                rooms[themedRoom] = themedRoom;
-            }
-            addRoomToDisplay(themedRoom, theme);
-        }
-    }
-
-    function addRoomToDisplay(themedRoom, theme) {
-      var card = document.createElement('div');
-      card.setAttribute('class', 'col-md-5');
-      var image = document.createElement('img');
-      image.setAttribute('id', 'myCard');
-      image.setAttribute('width', '350px');
-      image.setAttribute('height', '500px');
-      image.setAttribute('margin-top', '120px');
-      image.src = themedRoom;
-      var heading = document.createElement('h2')
-      if (theme == "Humans_Environment") {
-        heading.textContent = "Humans & Environment";
-      }
-      card.append(heading);
-      card.append(image);
-      $(".row-fluid").prepend(card);
-    }
 
 </script>
 </html>
