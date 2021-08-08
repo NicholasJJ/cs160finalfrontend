@@ -79,36 +79,36 @@ def register(request):
 
 
 @csrf_exempt
-def uploadText(request):
-    if request.method != 'POST':
-        return django.http.JsonResponse({
-        "result":-100,
-        "msg":"Parameter Wrong"
-    })
-    accessToken, fileName, fileContent = request.POST.get('accessToken',0), request.POST.get('fileName',0), request.POST.get('fileContent',0)
-    db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
-    cursor = db.cursor()
-    cursor.execute("SELECT count( * ) FROM Articles WHERE `Aritcle_Name` = %s;", (fileName,))
-    data = cursor.fetchone()
-    if data[0] != 0:
-        db.close()
-        return django.http.JsonResponse({
-        "result":-400,
-        "msg":"File Already Exists"
-    })
-    else:
-        print(hash)
-        sql = "INSERT INTO Articles (Aritcle_Name, Article_Owner, Article_Content) VALUES (%s, %s, %s)"
-        val = (str(fileName), str(accessToken), str(fileContent))
-        cursor.execute(sql , val)
-        db.commit()        
-        data = cursor.fetchone()
-        db.close()
-        return django.http.JsonResponse({
-        "result":0,
-        "msg":"Add Success",
-        "accessToken":accessToken
-    })
+# def uploadText(request):
+#     if request.method != 'POST':
+#         return django.http.JsonResponse({
+#         "result":-100,
+#         "msg":"Parameter Wrong"
+#     })
+#     accessToken, fileName, fileContent = request.POST.get('accessToken',0), request.POST.get('fileName',0), request.POST.get('fileContent',0)
+#     db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
+#     cursor = db.cursor()
+#     cursor.execute("SELECT count( * ) FROM Articles WHERE `Aritcle_Name` = %s;", (fileName,))
+#     data = cursor.fetchone()
+#     if data[0] != 0:
+#         db.close()
+#         return django.http.JsonResponse({
+#         "result":-400,
+#         "msg":"File Already Exists"
+#     })
+#     else:
+#         print(hash)
+#         sql = "INSERT INTO Articles (Aritcle_Name, Article_Owner, Article_Content) VALUES (%s, %s, %s)"
+#         val = (str(fileName), str(accessToken), str(fileContent))
+#         cursor.execute(sql , val)
+#         db.commit()        
+#         data = cursor.fetchone()
+#         db.close()
+#         return django.http.JsonResponse({
+#         "result":0,
+#         "msg":"Add Success",
+#         "accessToken":accessToken
+#     })
 
 @csrf_exempt
 def getText(request):
@@ -139,5 +139,25 @@ def getText(request):
         "text": data[0]
     })
 
+@csrf_exempt
+def uploadText(request):
+    if request.method != 'POST':
+        return django.http.JsonResponse({
+        "result":-100,
+        "msg":"Parameter Wrong"
+    })
+    LastPart_Language, Genre, Name_Of_Writters= request.POST.get('LastPart_Language',0), request.POST.get('Genre',0), request.POST.get('Name_Of_Writters',0)
+    Story_Content, Story_Summary = request.POST.get('Story_Content', 0), request.POST.get('Story_Summary', 0)
+    db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
+    cursor = db.cursor()
+    sql = "INSERT INTO `UserInformation`.`Ariticle_Storage` (`LastPart_Language`, `Genre`,`Name_Of_Writters`,`Story_Content`,`Story_Summary`) VALUES (%s, %s, %s, %s, %s)"
+    val = (str(LastPart_Language), str(Genre), str(Name_Of_Writters), str(Story_Content), str(Story_Summary))
+    cursor.execute(sql , val)
+    db.commit()
+    db.close()
+    return django.http.JsonResponse({
+        "result":0,
+        "msg":"Add Success"
+    })
 
 print(django.VERSION)    
