@@ -6,5 +6,5 @@ def gallery(request):
 def testwrite(request):
     return render(request, 'coloring/testwrite.html')
 
-def language(request):
-    return render(request, 'coloring/language.html')
+def genre(request):
+    return render(request, 'coloring/genre.html')

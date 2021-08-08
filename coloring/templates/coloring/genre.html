@@ -1,0 +1,141 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Museum Display</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'draw/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style type="text/css">
+
+      body {
+        background-color: #f1f1f1;
+      }
+
+      h1 {
+        font-family: "Mulish";
+        font-size: 32px;
+        font-weight: 400;
+        color: #30251e;
+        padding-top: 42px;
+      }
+
+      h2 {
+        font-family: "Mulish";
+        font-size: 20px;
+        font-weight: 400;
+        color: #30251e;
+        padding-top: 15px;
+      }
+
+      #top-bar {
+        width: 100%;
+        top: 0;
+        left: 0;
+        text-align: center;
+      }
+
+      .row-fluid {
+        overflow: auto;
+        white-space: nowrap;
+        margin-top: 35px;
+        margin-left: 100px;
+        margin-right: 100px;
+      }
+
+      .col-md-5 {
+        overflow: auto;
+        white-space: nowrap;
+        background-color: #f5f5f5;
+        height: 600px;
+        border-radius: 2px;
+        margin: 25px;
+        box-shadow: 1px 1px 6px 1px #cccccc;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .original {
+        margin-top: 200px;
+      }
+
+    </style>
+
+</head>
+
+<body>
+  <div id="top-bar">
+    <h1> Collaborative Museum </h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid justify-content-center">
+    </div>
+  </div>
+</body>
+
+<script>
+        //localStorage.clear();
+        //sessionStorage.clear();
+    var savedPics;
+    var id;
+    var artwork;
+    var myCardDisplay = document.getElementById('myCard');
+
+    window.onload = function() {
+		  savedFinals = JSON.parse(localStorage.getItem("savedFinals"));
+      savedHeadings = JSON.parse(localStorage.getItem("savedHeadings"));
+      var artwork;
+      for (var i = 0; i <= savedFinals.length - 1; i++) {
+          addRoomToDisplay(savedFinals[i], savedHeadings[i]);
+      }
+    }
+
+    //initialize the websocket
+    var rooms = {};
+    var socket = new WebSocket(
+        'wss://' + window.location.host + '/ws/draw');
+
+    // Add code here if you want to pass any other information.
+    var received;
+    socket.onmessage = function(receivedMessage) {
+        received = JSON.parse(receivedMessage.data);
+        console.log("Received: " + JSON.stringify(received));
+        // Display all users' artwork
+        var themedRoom = received["display"];
+        var theme = received["theme"]
+        if (themedRoom) {
+            if ((themedRoom in rooms) == false) {
+                rooms[themedRoom] = themedRoom;
+            }
+            addRoomToDisplay(themedRoom, theme);
+        }
+    }
+
+    function addRoomToDisplay(themedRoom, theme) {
+      var card = document.createElement('div');
+      card.setAttribute('class', 'col-md-5');
+      var image = document.createElement('img');
+      image.setAttribute('id', 'myCard');
+      image.setAttribute('width', '350px');
+      image.setAttribute('height', '500px');
+      image.setAttribute('margin-top', '120px');
+      image.src = themedRoom;
+      var heading = document.createElement('h2')
+      if (theme == "Humans_Environment") {
+        heading.textContent = "Humans & Environment";
+      }
+      card.append(heading);
+      card.append(image);
+      $(".row-fluid").prepend(card);
+    }
+
+</script>
+</html>
