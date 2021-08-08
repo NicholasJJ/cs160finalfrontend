@@ -27,5 +27,8 @@ def genre(request):
 def instructions(request):
     return render(request, 'coloring/instructions.html')
 
+def index(request):
+    return render(request, 'coloring/index.html')
+  
 def language(request):
     return render(request, 'coloring/language.html')

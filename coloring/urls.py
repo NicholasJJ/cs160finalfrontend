@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from coloring import BackendMySQL
 
 urlpatterns = [
     path('gallery', views.gallery, name='gallery'),
@@ -11,5 +12,11 @@ urlpatterns = [
     path('landing', views.landing, name='landing'),
     path('genre', views.genre, name='genre'),
     path('instructions', views.instructions, name='instructions'),
+    path('test_api', BackendMySQL.test_api, name='test_api'),
+    path('login', BackendMySQL.login, name='login'),
+    path('register', BackendMySQL.register, name='register'),
+    path('uploadText', BackendMySQL.uploadText, name = "uploadText"),
+    path('getText', BackendMySQL.getText, name = "getText"),
+    path('index', views.index, name='index'),
     path('language', views.language, name='language')
 ]
