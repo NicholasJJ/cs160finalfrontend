@@ -328,7 +328,7 @@
               <!-- Close icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aclose%3A -->
               <input type="image" id="close" src="/static/images/close_black_48dp.svg"></input>
       		   </div>
-            <form onsubmit="return false">
+            <form id="f" onsubmit="return false">
               <h3> Language of Added Section: </h3>
               <input type="text" class="modal-text" id="lang" name="lang"></input>
               <h3> Did you end the story? </h3>
@@ -353,6 +353,14 @@
   </body>
 
   <script>
+    window.onload = function(){
+      // h = getStory(sessionStorage.getItem("token"));
+      // s = document.getElementById("story");
+      // s.innerHTML = h;
+      // summary = getSummary(sessionStorage.getItem("token"));
+      // sum = document.getElementById("summary-box");
+      // sum.innerHTML = summary;
+    }
     var Toolbar = Quill.import('modules/toolbar');
     var toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -372,13 +380,6 @@
                   theme: 'snow'
                 });
 
-
-    function repeat() {
-      var h = editor.root.innerHTML;
-      paste = document.getElementById("paste");
-      paste.innerHTML = h;
-    }
-
     var modal = document.getElementById("confirmation");
 
     $("#back").click(function(){
@@ -394,6 +395,20 @@
   	});
 
     $("#submit").click(function(){
+        arr = $("#f").serializeArray();
+        // console.log(arr[0].value);
+        // console.log(arr[1].value);
+        // console.log(arr[2].value);
+        finished = false;
+        if (arr[1].value == "Yes") {
+          finished = true;
+        }
+        newSummary = editor.root.innerHTML;
+        if (sessionStorage.getItem("makingNewStory") == "false") {
+          // replaceStory(sessionStorage.getItem("token"),arr[0].value,arr[2].value,sessionStorage.getItem("story"),newSummary,finished)
+        } else {
+          // newStory(arr[0].value,arr[2].value,sessionStorage.getItem("story"),newSummary,finished)
+        }
   			location.href = "landing";
   	});
   </script>

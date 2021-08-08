@@ -206,13 +206,13 @@
         <div class="col-xs-6" id="left">
           <div id="scroll-top">
       			<img src="/static/images/scroll-top.png" width="518px" height="40px">
-      			<div id="story"></div>
+      			<div id="story" class="ql-editor" data-gramm="false" contenteditable="false" spellcheck="false"></div>
             <img id="scroll-2" src="/static/images/scroll-top.png" width="518px" height="40px">
       			</div>
         </div>
         <div class="col-xs-6" id="right">
           <div id="header"><h2>Summary</h2></div>
-      		<div id="summary-box"></div>
+      		<div id="summary-box" class="ql-editor" data-gramm="false" contenteditable="false" spellcheck="false"></div>
           <div id="line"></div>
           <div id="wrapper">
           <div id="editor"><p>Continue the story by replacing this text</p></div>
@@ -224,6 +224,16 @@
   </body>
 
   <script>
+    window.onload = function(){
+      title = document.getElementById("title");
+      title.innerHTML = "<h1> "+sessionStorage.getItem("language")+" &nbsp&nbsp/&nbsp&nbsp "+sessionStorage.getItem("genre")+" </h1>";
+      // h = getStory(sessionStorage.getItem("token"));
+      // s = document.getElementById("story");
+      // s.innerHTML = h;
+      // summary = getSummary(sessionStorage.getItem("token"));
+      // sum = document.getElementById("summary-box");
+      // sum.innerHTML = summary;
+    }
     var Toolbar = Quill.import('modules/toolbar');
     var toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -255,6 +265,14 @@
   	});
 
   	$("#add").click(function(){
+        addition = editor.root.innerHTML;
+        if (sessionStorage.getItem("makingNewStory") == "false") {
+          addition = "<br><br>" + addition;
+        // sessionStorage.setItem("story", getStory(sessionStorage.getItem("token")) + addition);
+        } else {
+          sessionStorage.setItem("story",addition);
+        }
+        
   			location.href = "write_summary";
   	});
   </script>

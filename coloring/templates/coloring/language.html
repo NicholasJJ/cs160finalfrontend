@@ -143,14 +143,11 @@
       </div>
       <div class="col-2"></div>
     </div>
-    <div id="ladder" style="background-color: #E0E0E0">
-    </div>
+    <!-- <div id="ladder" style="background-color: #E0E0E0">
+    </div> -->
     <div class="grid">
       <div class="shelf"></div>
-      <div class="ladder">
-
-        <a><div class="language-button"></div></a>
-        <a><div class="language-button"></div></a>
+      <div id="ladder" class="ladder">
 
 
 
@@ -190,7 +187,7 @@
     var ladder = document.getElementById("ladder");
     allLanguages.forEach(function(value, key){
       var link = document.createElement("a");
-      link.setAttribute("onclick", "updateLanguage(key, value)");
+      link.setAttribute("onclick", "updateLanguage('"+key.toString()+"', '"+value.toString()+"')");
       var languageButton = document.createElement("div");
       languageButton.setAttribute("class", "language-button");
       var languageText = document.createElement("div");
@@ -199,7 +196,7 @@
       console.log(value);
       console.log(languageText);
 
-      languageText.appendChild(value);
+      languageText.innerText = value
       languageButton.appendChild(languageText);
       link.appendChild(languageButton)
       ladder.appendChild(link);
@@ -207,10 +204,12 @@
   }
 
   function updateLanguage(key, value) {
+    console.log("hi");
     var top = document.getElementById("top-box");
-    var mid = document.getELementById("mid-box");
+    var mid = document.getElementById("mid-box");
     top.innerHTML = key;
     mid.innerHTML = value;
+    sessionStorage.setItem("language",key);
   }
 </script>
 </html>

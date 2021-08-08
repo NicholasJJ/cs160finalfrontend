@@ -130,7 +130,7 @@
 
 		    var link = document.createElement("a");
             link.setAttribute("class", "btn");
-            link.setAttribute("onclick", "selectGenre(this)");
+            link.setAttribute("onclick", "selectGenre('"+allGenre[i]+"')");
 
             var genreName = document.createElement("p");
             genreName.setAttribute("style", "font-family: Mulish; font-size: 4vh; color: #F2F0ED");
@@ -146,6 +146,11 @@
     }
 
     function selectGenre(genre) {
+        sessionStorage.setItem("genre",genre);
+        lang = sessionStorage.getItem("language");
+        // token = getToken(genre,lang)
+        // sessionStorage.setItem("token", token);
+        location.href="preview";
     }
 </script>
 </html>
