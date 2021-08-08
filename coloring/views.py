@@ -23,3 +23,6 @@ def landing(request):
     
 def genre(request):
     return render(request, 'coloring/genre.html')
+
+def instructions(request):
+    return render(request, 'coloring/instructions.html')
