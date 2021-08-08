@@ -5,6 +5,7 @@
 <head>
     <title>Genre</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static '/vendors/bootstrap/css/bootstrap.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}" />
 
@@ -17,13 +18,11 @@
 
     <style type="text/css">
     #icon-return{
-        width: 5%;
-        height: 5%;
-        margin: 0 0 0 0;
+        margin: 0 0 0 1vw;
         background: #B2B8AD;
     }
 
-    #genre {
+    #choose-genre {
         font-family: "Mulish";
         font-size: 4vw;
         font-weight: 400;
@@ -47,7 +46,25 @@
         border: 1px solid #524b47;
     }
 
-    #step {
+    .grid {
+        position: absolute;
+        top: 8vh;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+    }
+
+    .cell {
+        width: 30%;
+        background-size: cover;
+    }
+
+    .ladder {
+        width: 40%;
+    }
+    
+    #genre {
         background-color: #7e695a;
     }
 
@@ -58,29 +75,28 @@
 <body style="overflow-x: hidden;">
     <div class="containter-fluid" >
 		<div class = "row align-items-center justify-content-center" style="height: 8vh; background-color: #D0D6CA">
-            <div class = "col-1">
-                <svg xmlns="http://www.w3.org/2000/svg" height="6vh" viewBox="0 0 24 24" fill="#1B1211">
+            <div class = "col-2">
+                <svg id = "icon-return" xmlns="http://www.w3.org/2000/svg" height="6vh" viewBox="0 0 24 24" fill="#1B1211">
                     <path d="M0 0h24v24H0V0z" fill="none"/>
                     <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
                 </svg>
             </div>
-            <div class = "col-10" id = "genre">
+            <div class = "col-8" id = "choose-genre">
                 Choose Genre
             </div>
-            <div class = "col-1">
+            <div class = "col-2">
             </div>
         </div>
 
-        <div class = "row" style = "height: 92vh">
-            <div class = "col">
-                <img src = "./../static/images/bookshelf_left.png" width="30%"></img>
-            <div>
-            <div class = "col-5" style = "background_color: #E3DFDB">
-                
+        <div class="grid">
+            <div class="cell" style="background-image: url(./../static/images/bookshelf_left.png)">
             </div>
-            <div class = "col">
-                <img src = "./../static/images/bookshelf_right.png" width="30%"></img>
-            <div>
+            <div class="ladder" style="background-color: #E0E0E0">
+                <div>
+                </div>
+            </div>
+            <div class="cell" style="background-image: url(./../static/images/bookshelf_right.png)">
+            </div>
         </div>
         
         
