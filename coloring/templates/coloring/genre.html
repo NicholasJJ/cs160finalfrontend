@@ -60,12 +60,15 @@
         background-size: cover;
     }
 
-    .ladder {
+    #ladder {
         width: 40%;
+        overflow-y:auto;
     }
     
-    #genre {
-        background-color: #7e695a;
+    #genreBtn {
+        width: 30vw;
+        height: 10vh;
+	    background: #A6ACA1;
     }
 
     </style>
@@ -91,9 +94,8 @@
         <div class="grid">
             <div class="cell" style="background-image: url(./../static/images/bookshelf_left.png)">
             </div>
-            <div class="ladder" style="background-color: #E0E0E0">
-                <div>
-                </div>
+            <div id="ladder" style="background-color: #E0E0E0">
+
             </div>
             <div class="cell" style="background-image: url(./../static/images/bookshelf_right.png)">
             </div>
@@ -109,5 +111,41 @@
         location.href = "";
     });
 
+    var allGenre = ["Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror", "Mystery", "Romance", "Satire", "Science Fiction", "Speculative", "Thriller", "Western", "Other"]
+    
+    window.onload = function(event) {
+		addGenre();
+	}
+
+    function addGenre() {
+        var ladder = document.getElementById("ladder")
+        for (var i = 0; i < allGenre.length; i ++) {
+            var row = document.createElement("div");
+            row.setAttribute("class", "row align-items-center d-flex justify-content-center")
+            row.setAttribute("style", "margin: 4vh 0 4vh 0")
+
+            var genreBtn = document.createElement("div");
+		    genreBtn.setAttribute("id", "genreBtn");
+            genreBtn.setAttribute("class", "align-items-center d-flex justify-content-center")
+
+		    var link = document.createElement("a");
+            link.setAttribute("class", "btn");
+            link.setAttribute("onclick", "selectGenre(this)");
+
+            var genreName = document.createElement("p");
+            genreName.setAttribute("style", "font-size: 4vh");
+            
+            var text = document.createTextNode(allGenre[i]);
+            genreName.appendChild(text);
+
+            link.appendChild(genreName);
+		    genreBtn.appendChild(link);
+            row.appendChild(genreBtn);
+            ladder.appendChild(row);
+        }
+    }
+
+    function selectGenre(genre) {
+    }
 </script>
 </html>
