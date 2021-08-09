@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}">
     <script type="text/javascript" src="{% static 'vendors/jquery/jquery-3.3.1.min.js' %}"></script>
 
+    <script src="{% static '/scripts/UploadToDataBaseExample.js' %}"></script>
+
     <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
   	<script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
 
@@ -370,13 +372,22 @@
   </body>
 
   <script>
+    writers = ""
     window.onload = function(){
-      // h = getStory(sessionStorage.getItem("token"));
-      // s = document.getElementById("story");
-      // s.innerHTML = h;
-      // summary = getSummary(sessionStorage.getItem("token"));
-      // sum = document.getElementById("summary-box");
-      // sum.innerHTML = summary;
+      h = sessionStorage.getItem("story");
+      s = document.getElementById("story");
+      s.innerHTML = h;
+      summary = sessionStorage.getItem("oldsummary");
+      sum = document.getElementById("summary-box");
+      sum.innerHTML = summary;
+      if (sessionStorage.getItem("makingNewStory") == "false") {
+        getWriters(sessionStorage.getItem("token"),cb)
+      }
+      
+    }
+    function cb(wret) {
+      writers = wret;
+      console.log("DONE!");
     }
 
     var allLanguages = [
@@ -442,17 +453,25 @@
         // console.log(arr[0].value);
         // console.log(arr[1].value);
         // console.log(arr[2].value);
-        finished = false;
+        finished = 0;
         if (arr[1].value == "Yes") {
-          finished = true;
+          finished = 1;
         }
         newSummary = editor.root.innerHTML;
-        if (sessionStorage.getItem("makingNewStory") == "false") {
-          // replaceStory(sessionStorage.getItem("token"),arr[0].value,arr[2].value,sessionStorage.getItem("story"),newSummary,finished)
-        } else {
-          // newStory(arr[0].value,arr[2].value,sessionStorage.getItem("story"),newSummary,finished)
+        if (arr[2].value.length == 0) {
+            arr[2].value = "Anonymous"
         }
-  			location.href = "landing";
+        if (sessionStorage.getItem("makingNewStory") == "false") {
+          writers += "  " + arr[2].value
+          replaceStory(sessionStorage.getItem("token"),arr[0].value,writers,sessionStorage.getItem("story"),newSummary,finished,cb2)
+        } else {
+          newStory(arr[0].value,sessionStorage.getItem("genre"),arr[2].value,sessionStorage.getItem("story"),newSummary,cb2)
+        }
+  			
   	});
+    function cb2(){
+      getAll()
+      // location.href = "landing";
+    }
   </script>
   </html>

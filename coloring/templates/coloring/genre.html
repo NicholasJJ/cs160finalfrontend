@@ -11,6 +11,7 @@
 
 	<script src="{% static '/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static '/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
+    <script src="{% static '/scripts/UploadToDataBaseExample.js' %}"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,13 +149,23 @@
             ladder.appendChild(row);
         }
     }
-
+    
     function selectGenre(genre) {
         sessionStorage.setItem("genre",genre);
         lang = sessionStorage.getItem("language");
-        // token = getToken(genre,lang)
-        // sessionStorage.setItem("token", token);
+        token = getToken(genre,lang,cb)
+    }
+    function cb(tokens) {
+        if (tokens.length == 0) {
+            sessionStorage.setItem("token", -1);
+        } else {
+            console.log(tokens);
+            sessionStorage.setItem("token", tokens[Math.floor(Math.random()*tokens.length)]);
+        }
+        console.log(sessionStorage.getItem("token"));
+        getAll()
         location.href="preview";
+        
     }
 </script>
 </html>

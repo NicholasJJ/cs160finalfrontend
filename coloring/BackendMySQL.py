@@ -269,3 +269,21 @@ def getTokenGallery(request):
             "msg": "Success",
             "id": results
         })
+
+@csrf_exempt
+def getAll(request):
+    if request.method != 'GET':
+        return django.http.JsonResponse({
+        "result":-100,
+        "msg":"Parameter Wrong"
+    })
+    db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
+    cursor = db.cursor()
+    req = "SELECT * FROM UserInformation.Ariticle_Storage"
+    cursor.execute(req)
+    data = cursor.fetchall()
+    return django.http.JsonResponse({
+        "result": 0,
+        "msg": "GotCha",
+        "id": data
+        })
