@@ -12,7 +12,7 @@
 	<script src="{% static '/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static '/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
     <script src="{% static '/scripts/UploadToDataBaseExample.js' %}"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
@@ -30,14 +30,14 @@
         font-family: Raleway;
         font-style: normal;
         font-weight: 500;
-        font-size: 3vw;
+        font-size: 3.7vh;
         text-align: center;
         color: #1B1211;
     }
 
     h1 {
         font-family: "Raleway";
-        font-size: 2.4vw;
+        font-size: 3.3vh;
         font-weight: 400;
         color: #1b1211;
         text-align: center;
@@ -71,21 +71,53 @@
     #genreBtn:hover {
         width: 35vw;
         height: 10vh;
-        background-color: #7D8873;
+        background-color: #838a7d;
     }
+
+    /* Back icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aarrow_back%3A */
+		#back{
+			position: absolute;
+			top: 50%;
+			transform: translate(0.9vw,-50%);
+			width: 4vh;
+			height: 4vh;
+	    text-align: center;
+	    background-image: url("/static/images/arrow_back_black_48dp.svg");
+	    background-position: center;
+	    background-repeat: no-repeat;
+			opacity: 0.7;
+			background-color: #b2b8ad;
+			border: 1px hidden;
+			text-align: center;
+			border-radius: 10px;
+		}
+
+	  #back:hover {
+	    background-color: #91998A;
+	    opacity: 0.7;
+	    background-image: url("/static/images/arrow_back_black_48dp.svg");
+	    background-position: center;
+	    background-repeat: no-repeat;
+	  }
+
+		#back:focus {
+			outline: none;
+			border: 1px solid #524b47;
+	  }
+
+    html, body {
+			height: 100%;
+		}
 
     </style>
 
 </head>
 
-<body style="overflow-x: hidden;">
+<body style="overflow-x: hidden; background-color: #E0E0E0;">
     <div class="containter-fluid" >
-		<div class = "row align-items-center justify-content-center" style="height: 8vh; background-color: #D0D6CA">
+		<div class = "row align-items-center justify-content-center" style="height: 7.9vh; background-color: #D0D6CA; box-shadow: 0 2px 6px -1px #b2b8ad; width: 100%; margin: 0px;">
             <div class = "col-2">
-                <svg id = "icon-return" xmlns="http://www.w3.org/2000/svg" height="6vh" viewBox="0 0 24 24" fill="#1B1211">
-                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
+                <button id="back" onclick="location.href = 'language'"></button>
             </div>
             <div class = "col-8" id = "choose-genre">
                 Choose Genre
@@ -113,7 +145,7 @@
 <script>
     $( document ).ready(function() {
         console.log( "ready!" );
-        
+
         $("#icon-return").click(function(){
             location.href = "language";
         });
@@ -122,7 +154,7 @@
             location.href = "preview";
         });
     });
-    
+
     var allGenre = ["Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror", "Mystery", "Romance", "Satire", "Science Fiction", "Speculative", "Thriller", "Western", "Other"]
 
     window.onload = function(event) {
@@ -145,7 +177,7 @@
 
             var genreName = document.createElement("p");
             genreName.setAttribute("id", allGenre[i]);
-            genreName.setAttribute("style", "font-family: Mulish; font-size: 4vh; color: #F2F0ED");
+            genreName.setAttribute("style", "font-family: 'Raleway'; font-weight: 500; font-size: 3.8vh; color: #F2F0ED");
             genreName.innerHTML = allGenre[i];
 
 		    genreBtn.appendChild(genreName);
@@ -153,7 +185,7 @@
             ladder.appendChild(row);
         }
     }
-    
+
     function selectGenre(genre) {
         sessionStorage.setItem("genre",genre);
         lang = sessionStorage.getItem("language");
@@ -169,7 +201,7 @@
         console.log(sessionStorage.getItem("token"));
         getAll()
         location.href="preview";
-        
+
     }
 </script>
 </html>
