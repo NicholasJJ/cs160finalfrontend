@@ -46,7 +46,12 @@
     }
 
     .ladder {
-        width: 45%;
+        width: 30%;
+        overflow-y:auto;
+    }
+
+    #display {
+        width: 40%;
         overflow-y:auto;
     }
 
@@ -147,21 +152,30 @@
     </div> -->
     <div class="grid">
       <div class="shelf"></div>
+
       <div id="ladder" class="ladder">
 
       </div>
-      <div class="w-25 py-5">
-        <div id = "genre" class="select-button">Choose Genre</div>
-        <div class="my-5">
-          <h3 id="top-box">Russian</h3>
-          <h3 id="mid-box">Русский язык</h3>
-          <h3 id="bot-box"></h3>
+
+      <div id = "display" class="py-5">
+        <div class = "row align-items-center justify-content-center">
+          <div id = "genre" class="select-button">Choose Genre</div>
         </div>
-        <div class="select-button">New Language</div>
+        <div class = "row align-items-center justify-content-center">
+          <div class="my-5">
+            <h3 id="top-box">Russian</h3>
+            <h3 id="mid-box">Русский язык</h3>
+            <h3 id="bot-box"></h3>
+          </div>
+        </div>
+        <div class = "row align-items-center justify-content-center">
+          <div class="select-button">Add New Language</div>
+        </div>
       </div>
     </div>
   </div>
 </body>
+
 <script>
   $(".icon-return").click(function(){
       location.href = "landing";
