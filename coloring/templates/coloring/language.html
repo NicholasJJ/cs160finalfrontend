@@ -225,12 +225,16 @@
   }
 
   function addLanguage() {
+    var count = 0;
     var ladder = document.getElementById("ladder");
     allLanguages.forEach(function(value, key){
       var link = document.createElement("a");
       link.setAttribute("onclick", "updateLanguage('"+key.toString()+"', '"+value.toString()+"')");
+      
       var languageButton = document.createElement("div");
       languageButton.setAttribute("class", "language-button");
+      languageButton.setAttribute("style", "transform: translate(" + 3.6 * count + "vw)");
+
       var languageText = document.createElement("div");
       languageText.setAttribute("class", "language-text");
       languageText.setAttribute("style", "font-size: 4vh; color: #F2F0ED; text-align: center");
@@ -242,6 +246,12 @@
       languageButton.appendChild(languageText);
       link.appendChild(languageButton)
       ladder.appendChild(link);
+
+      if (count == 5) {
+        count = 0;
+      } else {
+        count = count + 1; 
+      }
     });
   }
 
