@@ -151,7 +151,7 @@ def uploadText(request):
     db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
     cursor = db.cursor()
     sql = "INSERT INTO `UserInformation`.`Ariticle_Storage` (`LastPart_Language`, `Genre`,`Name_Of_Writters`,`Story_Content`,`Story_Summary`, `Finished`) VALUES (%s, %s, %s, %s, %s, %s)"
-    val = (str(LastPart_Language), str(Genre), str(Name_Of_Writters), str(Story_Content), str(Story_Summary), Finished)
+    val = (str(LastPart_Language), str(Genre), str(Name_Of_Writters), str(Story_Content), str(Story_Summary), str(Finished))
     cursor.execute(sql , val)
     db.commit()
     db.close()
@@ -176,7 +176,7 @@ def replaceText(request):
     cursor.execute("delete from Ariticle_Storage where Article_ID = %s", (Article_ID,))
     db.commit()
     sql = "REPLACE INTO `UserInformation`.`Ariticle_Storage` (`Article_ID`, `LastPart_Language`, `Genre`,`Name_Of_Writters`,`Story_Content`,`Story_Summary`,`Finished`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-    val = (Article_ID, str(LastPart_Language), str(Genre), str(Name_Of_Writters), str(Story_Content), str(Story_Summary), Finished)
+    val = (Article_ID, str(LastPart_Language), str(Genre), str(Name_Of_Writters), str(Story_Content), str(Story_Summary), str(Finished))
     cursor.execute(sql , val)
     db.commit()
     db.close()
