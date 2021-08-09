@@ -22,7 +22,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Mulish&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <style type="text/css">
 
       /* Wood texture background image source: ArtStation (image by Martin Novák) - https://www.artstation.com/artwork/yrNwn
@@ -295,19 +295,49 @@
         margin-bottom: 25px;
       }
 
-      #select {
-        width: 70%;
-        background-color: #b9b9ae;
-				border: 1px solid #4e643e;
-				border-radius: 2px;
-				padding-top: 8px;
-				padding-bottom: 6px;
-				text-align: center;
-        font-family: "Raleway";
-        font-size: 20px;
-        font-weight: 500;
-        color: #1b1211;
+      .form-control {
+        background-color: #f2f0ed;
+        border: 1px solid #bdb4b1;
+        border-radius: 8px;
+        width: 82%;
+        margin-left: 74px;
+        padding-left: 14px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
       }
+
+      .languageOption{
+    button.btn{
+    border-radius: 0;
+    border-color: #ffffff;
+    border-width: 2px;
+    background-color: transparent;  
+    &:hover{
+      background-color: rgba(0,0,0,.2);  
+      border-color: #ffffff;
+    }
+    .caret{
+      height: 10px;
+      width: 10px;
+      margin-top: -12px;
+      border: none;
+      &:before{
+        font-family: 'FontAwesome';
+        display: inline-block;
+        content:'\f107';
+        color: #fff;
+        font-size: 20px;        
+        // width: 200px;
+        // height: 200px;
+      }
+    }
+  }
 
     </style>
   </head>
@@ -347,9 +377,11 @@
             <form id="f" onsubmit="return false">
               <h3> Language of Added Section: </h3>
                 <!-- <input type="text" class="modal-text" id="lang" name="lang"></input> -->
-                <select class="modal-text">
-                  <option id = "select">No Language Selected</option>
-                </select>
+                <div class = "languageAddedSection">
+                  <select id="languageDropdown" class="form-control languageOption">
+                    <option>Select-Language</option>
+                  </select>
+                </div>
               <h3> Did you end the story? </h3>
               <label for="yes">
                 <input type="radio" class="radio" id="yes" name="end" value="Yes"><h4>Yes</h4>
@@ -384,6 +416,7 @@
         getWriters(sessionStorage.getItem("token"),cb)
       }
       
+      languageDropdown();
     }
     function cb(wret) {
       writers = wret;
@@ -412,8 +445,22 @@
     "Turkish [Türkçe]",
     "Urdu [اُردُو]",
     "Vietnamese [tiếng Việt]"
-  ];
+    ];
 
+    function languageDropdown() {
+      var languageDropdown = document.getElementById("languageDropdown");
+      for (var i = 0; i < allLanguages.length; i++) {
+        var language = document.createElement("option");
+        var text = document.createTextNode(allLanguages[i]);
+        language.appendChild(text);
+        languageDropdown.appendChild(language);
+      }
+    }
+
+    $('.dropdown-menu li').on('click', function() {
+      var getValue = $(this).text();
+      $('.dropdown-select').text(getValue);
+    });
 
     var Toolbar = Quill.import('modules/toolbar');
     var toolbarOptions = [
