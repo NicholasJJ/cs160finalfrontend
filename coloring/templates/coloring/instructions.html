@@ -127,7 +127,7 @@
     <div class="containter-fluid" >
 		<div id="header" class="row" style="margin: 0 0 0 0">
 			<div class="col-1" style="padding: 0 0 0 0;">
-				<button id="homebtn" onclick="location.href = 'landing'"></button>
+				<button id="homebtn"></button>
 			</div>
 			<div class="col-3"></div>
 			<div class="col-4">
@@ -190,6 +190,10 @@
 </body>
 
 <script>
+
+  $("#homebtn").click(function() {
+    location.href = "landing";
+  });
 
 </script>
 </html>

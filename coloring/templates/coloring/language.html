@@ -187,7 +187,7 @@
   <div class="container-fluid" >
     <div class="row align-items-center justify-content-center" style="height: 7.9vh; background-color: #D0D6CA; box-shadow: 0 2px 6px -1px #b2b8ad;">
       <div class = "col-2">
-          <button id="back" onclick="location.href = 'landing'"></button>
+          <button id="back"></button>
       </div>
       <div class="col-8 choose-language">
           Choose Language
@@ -223,9 +223,9 @@
 </body>
 
 <script>
-  $(".icon-return").click(function(){
-      location.href = "landing";
-  });
+	$("#back").click(function(){
+			location.href = "landing";
+	});
 
   $("#genre").click(function(){
       location.href = "genre";

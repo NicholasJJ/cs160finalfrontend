@@ -121,7 +121,7 @@
     <div class="containter-fluid" >
 		<div class = "row align-items-center justify-content-center" style="height: 7.9vh; background-color: #D0D6CA; box-shadow: 0 2px 6px -1px #b2b8ad; width: 100%; margin: 0px;">
             <div class = "col-2">
-                <button id="back" onclick="location.href = 'language'"></button>
+                <button id="back"></button>
             </div>
             <div class = "col-8" id = "choose-genre">
                 Choose Genre
@@ -150,8 +150,8 @@
     $( document ).ready(function() {
         console.log( "ready!" );
 
-        $("#icon-return").click(function(){
-            location.href = "language";
+        $("#back").click(function(){
+          location.href = "language";
         });
 
         $("#genreBtn").click(function() {
