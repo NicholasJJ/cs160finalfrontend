@@ -232,8 +232,8 @@
       title = document.getElementById("title");
       title.innerHTML = "<h1> "+sessionStorage.getItem("language")+" &nbsp&nbsp/&nbsp&nbsp "+sessionStorage.getItem("genre")+" </h1>";
       if (sessionStorage.getItem("makingNewStory") == "false") {
-        s = document.getElementById("oldstory");
-        s.innerHTML = sessionStorage.getItem("story");
+        s = document.getElementById("story");
+        s.innerHTML = sessionStorage.getItem("oldstory");
         sum = document.getElementById("summary-box");
         sum.innerHTML = sessionStorage.getItem("oldsummary");
       } else {
@@ -276,11 +276,11 @@
         addition = editor.root.innerHTML;
         if (sessionStorage.getItem("makingNewStory") == "false") {
           addition = "<br><br>" + addition;
-        sessionStorage.setItem("story", sessionStorage.getItem("oldstory") + addition);
+          sessionStorage.setItem("story", sessionStorage.getItem("oldstory") + addition);
         } else {
           sessionStorage.setItem("story",addition);
-          location.href = "write_summary";
         }
+        location.href = "write_summary";
   	});
   </script>
   </html>
