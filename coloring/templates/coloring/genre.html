@@ -15,8 +15,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
     <style type="text/css">
     #icon-return{
         margin: 0 0 0 1vw;
@@ -28,6 +27,14 @@
         font-size: 4vw;
         font-weight: 400;
         color: #1B1211;
+        text-align: center;
+    }
+
+    h1 {
+        font-family: "Raleway";
+        font-size: 2.4vw;
+        font-weight: 400;
+        color: #1b1211;
         text-align: center;
     }
 
@@ -72,6 +79,12 @@
 	    background: #A6ACA1;
     }
 
+    #genreBtn:hover {
+        width: 35vw;
+        height: 10vh;
+	    background: #A6ACA1;
+    }
+
     </style>
 
 </head>
@@ -88,7 +101,8 @@
             <div class = "col-8" id = "choose-genre">
                 Choose Genre
             </div>
-            <div class = "col-2">
+            <div class = "col-2" id = "language">
+
             </div>
         </div>
 
@@ -108,18 +122,24 @@
 </body>
 
 <script>
-    $("#icon-return").click(function(){
-        location.href = "language";
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        
+        $("#icon-return").click(function(){
+            location.href = "language";
+        });
+
+        $("#genreBtn").click(function() {
+            location.href = "preview";
+        });
     });
-
-    $("genreBtn").click(function() {
-        location.href = "preview";
-    })
-
+    
     var allGenre = ["Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror", "Mystery", "Romance", "Satire", "Science Fiction", "Speculative", "Thriller", "Western", "Other"]
 
     window.onload = function(event) {
 		addGenre();
+        var language = document.getElementById("language");
+        language.innerHTML = "<h1> "+ sessionStorage.getItem("language") + "</h1>";
 	}
 
     function addGenre() {
@@ -138,10 +158,9 @@
             link.setAttribute("onclick", "selectGenre('"+allGenre[i]+"')");
 
             var genreName = document.createElement("p");
+            genreName.setAttribute("id", allGenre[i]);
             genreName.setAttribute("style", "font-family: Mulish; font-size: 4vh; color: #F2F0ED");
-
-            var text = document.createTextNode(allGenre[i]);
-            genreName.appendChild(text);
+            genreName.innerHTML = allGenre[i];
 
             link.appendChild(genreName);
 		    genreBtn.appendChild(link);
