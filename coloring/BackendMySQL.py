@@ -297,3 +297,47 @@ def getAll(request):
         "msg": "GotCha",
         "id": data
         })
+
+@csrf_exempt
+def addLanguage(request):
+    print(request)
+    if request.method != 'POST':
+        return django.http.JsonResponse({
+        "result":-100,
+        "msg":"Parameter Wrong"
+    })
+    # WARNING: IT REQUIRE TO BE UNIQUE
+    language_name = request.POST.get('language_name')
+    db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
+    cursor = db.cursor()
+    sql = "INSERT INTO `UserInformation`.`Language` (`Language_Name`) VALUES (%s)"
+    val = (str(language_name), )
+    cursor.execute(sql , val)
+    db.commit()
+    db.close()
+    return django.http.JsonResponse({
+        "result":0,
+        "msg":"Add Success"
+    })
+
+@csrf_exempt
+def getLanguage(request):
+    print(request)
+    if request.method != 'GET':
+        return django.http.JsonResponse({
+        "result":-100,
+        "msg":"Parameter Wrong"
+    })
+    # WARNING: IT REQUIRE TO BE UNIQUE
+    db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
+    cursor = db.cursor()
+    cursor.execute("select * from Language")
+    data = cursor.fetchall()
+    result =  [i[1] for i in data]
+    db.commit()
+    db.close()
+    return django.http.JsonResponse({
+        "result":0,
+        "msg":"Add Success",
+        "list_of_language": result
+    })

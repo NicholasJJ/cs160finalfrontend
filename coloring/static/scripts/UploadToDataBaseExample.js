@@ -124,4 +124,31 @@ function getAll() {
         console.log(response);
       });
 }
-
+function addLanguage(language_name) {
+    var settings = {
+        "url": "http://localhost:8000/coloring/addLanguage",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "data": {
+          "language_name": language_name
+        }
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
+function getLanguage() {
+    var settings = {
+        "url": "http://localhost:8000/coloring/getLanguage",
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
