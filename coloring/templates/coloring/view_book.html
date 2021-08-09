@@ -264,16 +264,21 @@
   </body>
 
   <script>
+  var experiment = false;
   writtenStory = ""
   writtenSummary = ""
   writtenWriters = ""
   window.onload = function(){
-    // writtenStory = sessionStorage.getItem("viewStory");
-    // writtenSummary = sessionStorage.getItem("viewSummary");
-    // writtenWriters = sessionStorage.getItem("viewWriters");
-    writtenStory = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut tristique nulla. Phasellus id euismod dolor. Aliquam erat volutpat. Praesent ut semper turpis, a convallis quam. Curabitur sit amet velit tristique, tempor massa pellentesque, commodo tortor. Nullam eu justo metus. Duis tristique pulvinar lacinia. Quisque interdum mauris dui, et consequat diam sollicitudin ac. Morbi convallis turpis ut semper tempor. Vivamus euismod lectus elit, nec molestie eros semper ut. Vestibulum viverra semper risus, vel blandit massa ultrices consequat. Quisque eu hendrerit ligula. Duis ac rutrum magna, vehicula bibendum nibh. Nulla sed ante ut libero dignissim pulvinar. Nullam ullamcorper non nisi rutrum pharetra"
-    writtenSummary = "This is the summary"
-    writtenWriters = "Alice.Bob.Carol"
+    if (experiment) {
+      writtenStory = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut tristique nulla. Phasellus id euismod dolor. Aliquam erat volutpat. Praesent ut semper turpis, a convallis quam. Curabitur sit amet velit tristique, tempor massa pellentesque, commodo tortor. Nullam eu justo metus. Duis tristique pulvinar lacinia. Quisque interdum mauris dui, et consequat diam sollicitudin ac. Morbi convallis turpis ut semper tempor. Vivamus euismod lectus elit, nec molestie eros semper ut. Vestibulum viverra semper risus, vel blandit massa ultrices consequat. Quisque eu hendrerit ligula. Duis ac rutrum magna, vehicula bibendum nibh. Nulla sed ante ut libero dignissim pulvinar. Nullam ullamcorper non nisi rutrum pharetra"
+      writtenSummary = "This is the summary"
+      writtenWriters = "Alice.Bob.Carol"
+    } else {
+      writtenStory = sessionStorage.getItem("viewStory");
+      writtenSummary = sessionStorage.getItem("viewSummary");
+      writtenWriters = sessionStorage.getItem("viewWriters");
+      console.log(writtenWriters);
+    }
     document.getElementById("story").innerHTML = writtenStory;
     document.getElementById("summary-box").innerHTML = writtenSummary;
   }
