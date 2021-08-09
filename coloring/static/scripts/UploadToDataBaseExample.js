@@ -1,24 +1,4 @@
-function login(username, password) {
-    console.log("456")
-    var settings = {
-        "url": "http://localhost:8000/login?username=" + username + "&" + "password=" + password,
-        "method": "GET",
-        "timeout": 0,
-        "Access-Control-Allow-Origin":"*",
-        headers: {
-            "charset":"UTF-8",
-            "Access-Control-Allow-Origin":'http://localhost:8080',
-            "Access-Control-Allow-Credentials":"true",
-          }
-      };
-      
-      $.ajax(settings).done(function (response) {
-        //WRITE YOUR CODE HERE
-        console.log(response);
-      });
-}
-
-function uploadText(LastPart_Language, Genre, Name_Of_Writters, Story_Content, Story_Summary) {
+function newStory(LastPart_Language, Genre, Name_Of_Writters, Story_Content, Story_Summary) {
     var Name_Of_Writters_Str = ""
     for (const v of Name_Of_Writters) {
         Name_Of_Writters_Str += String(v) + "."
@@ -36,7 +16,8 @@ function uploadText(LastPart_Language, Genre, Name_Of_Writters, Story_Content, S
           "Genre": Genre,
           "Name_Of_Writters": Name_Of_Writters_Str,
           "Story_Content": Story_Content,
-          "Story_Summary": Story_Summary
+          "Story_Summary": Story_Summary,
+          "Finished": "0"
         }
       };
       
@@ -45,20 +26,89 @@ function uploadText(LastPart_Language, Genre, Name_Of_Writters, Story_Content, S
       });
 }
 
-function getText(filename) {
+function replaceStory(token, last_Part_Language, genre, newWriter, storyContent, StorySummary, finished) {
+    var Name_Of_Writters_Str = ""
+            for (const v of newWriter) {
+                Name_Of_Writters_Str += String(v) + "."
+            }
+            Name_Of_Writters_Str = Name_Of_Writters_Str.substring(0, Name_Of_Writters_Str.length - 1)
     var settings = {
-        "url": "http://localhost:8000/getText?filename=" + filename,
+        "url": "http://localhost:8000/coloring/replaceText",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "data": {
+          "LastPart_Language": last_Part_Language,
+          "Genre": genre,
+          "Name_Of_Writters": Name_Of_Writters_Str,
+          "Story_Content": storyContent,
+          "Story_Summary": StorySummary,
+          "Finished": finished,
+          "Article_ID": token
+        }
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
+
+function getToken(genre, language) {
+    var settings = {
+        "url": "http://localhost:8000/coloring/getTokenByInfo?Language=" + language + "&Genre=" + genre,
         "method": "GET",
         "timeout": 0,
       };
       
-    //   {
-    //     "result": 0,
-    //     "msg": "Get Success",
-    //     "text": "\"cross the firewall and go to the world\""
-    //   }
       $.ajax(settings).done(function (response) {
-        //WRITE YOUR CODE HERE
-        console.log(response);
+        if (response.result == 0) {
+            //RETURN A LIST OF ID, U NEED TO RANDOM CHOOSE ONE
+            return response.id
+        } else return -1
       });
 }
+
+function getStory(token) {
+    var settings = {
+        "url": "http://localhost:8000/coloring/getText?id=" + token,
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        if (response.result == 0) {
+            return response.Story
+        } else return -1
+      });
+}
+
+function getSummary(token) {
+    var settings = {
+        "url": "http://localhost:8000/coloring/getText?id=" + token,
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        if (response.result == 0) {
+            return response.Summary
+        } else return -1
+      });
+}
+
+function getWriters(token) {
+    var settings = {
+        "url": "http://localhost:8000/coloring/getText?id=" + token,
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        if (response.result == 0) {
+            return response.Writters
+        } else return -1
+      });
+}
+

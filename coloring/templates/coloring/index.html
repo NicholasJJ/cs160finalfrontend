@@ -51,6 +51,33 @@
             });
         }
 
+        function replaceText(Article_ID, LastPart_Language, Genre, Name_Of_Writters, Story_Content, Story_Summary) {
+            var Name_Of_Writters_Str = ""
+            for (const v of Name_Of_Writters) {
+                Name_Of_Writters_Str += String(v) + "."
+            }
+            Name_Of_Writters_Str = Name_Of_Writters_Str.substring(0, Name_Of_Writters_Str.length - 1)
+            var settings = {
+                "url": "http://localhost:8000/coloring/uploadText",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                "LastPart_Language": LastPart_Language,
+                "Genre": Genre,
+                "Name_Of_Writters": Name_Of_Writters_Str,
+                "Story_Content": Story_Content,
+                "Story_Summary": Story_Summary
+                }
+            };
+            
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+        }
+
         function getText(filename) {
             var settings = {
                 "url": "http://localhost:8000/coloring/getText?filename=" + filename,

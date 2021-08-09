@@ -16,7 +16,10 @@ urlpatterns = [
     path('login', BackendMySQL.login, name='login'),
     path('register', BackendMySQL.register, name='register'),
     path('uploadText', BackendMySQL.uploadText, name = "uploadText"),
+    path('replaceText', BackendMySQL.replaceText, name = "uploadText"),
     path('getText', BackendMySQL.getText, name = "getText"),
+    path('getTokenByInfo', BackendMySQL.getTokenByInfo, name = "getTokenByInfo"),
+    path('getTokenGallery', BackendMySQL.getTokenGallery, name = "getTokenGallery"),
     path('index', views.index, name='index'),
     path('language', views.language, name='language')
 ]
