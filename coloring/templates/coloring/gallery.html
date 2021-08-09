@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="./../static/vendors/bootstrap/css/bootstrap.css" />
 	<style type="text/css">
 		body {
-			background-image: url(./../static/images/bookshelf2.png);
+			background-image: url(./../static/images/bookshelfgrey.png);
 			background-repeat: repeat;
 			background-size: 16vw;
 		}
@@ -129,6 +129,7 @@
 	window.onload = function(event) {
 		marginBot = "80vh"
 		newShelf(marginBot,f);
+		newShelf("500vh",c);
 		newHangingShelf();
 		newHangingShelf();
 		newStair();
@@ -156,11 +157,11 @@
 			newShelf(marginBot,c);
 			lowestC += $(".fbook").height() + parseInt(marginBot)
 		}
-		if (lowestM - h + midgroundChange < 50) {
+		if (lowestM - h + midgroundChange < 200) {
 			//make new foreground book
 			newHangingShelf();
 		}
-		if (lowestB - h < 450) {
+		if (lowestB - h < 700) {
 			//make new foreground book
 			newStair();
 		}
