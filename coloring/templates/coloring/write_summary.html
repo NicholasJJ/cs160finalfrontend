@@ -244,6 +244,20 @@
 				background-color: #91998A;
       }
 
+      #close_new_language {
+        width: 32px;
+        height: 32px;
+        margin-top: 18px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        opacity: 0.7;
+				background-color: #b2b8ad;
+      }
+
+      #close_new_language:hover {
+				background-color: #91998A;
+      }
+
       .modal-text {
         background-color: #f2f0ed;
         border: 1px solid #bdb4b1;
@@ -283,6 +297,24 @@
       }
 
       #submit:hover {
+				background-color: #D4D4CF;
+			}
+
+      #submit_new_language {
+        width: 70%;
+        background-color: #b9b9ae;
+				border: 1px solid #4e643e;
+				border-radius: 2px;
+				padding-top: 8px;
+				padding-bottom: 6px;
+				text-align: center;
+        font-family: "Raleway";
+        font-size: 20px;
+        font-weight: 500;
+        color: #1b1211;
+      }
+
+      #submit_new_language:hover {
 				background-color: #D4D4CF;
 			}
 
@@ -387,11 +419,11 @@
             <div class="modal-content">
               <div id="modal-bar">
                 <!-- Close icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aclose%3A -->
-                <input type="image" id="close" src="/static/images/close_black_48dp.svg"></input>
+                <input type="image" id="close_new_language" src="/static/images/close_black_48dp.svg"></input>
       		    </div>
               <form id="f_new_language" onsubmit="return false">
                 <h3> Language of Added Section: </h3>
-                  <input type="text" class="modal-text" id="lang" name="lang"></input>
+                  <input type="text" class="modal-text" id="lang_new_language" name="lang"></input>
                 <h3> Did you end the story? </h3>
                 <label for="yes">
                   <input type="radio" class="radio" id="yes_new_language" name="end" value="Yes"><h4>Yes</h4>
@@ -472,7 +504,7 @@
     });
 
     // boolean - true if the user is writing in a new language
-    var new_language = true;
+    var new_language = false;
 
     var Toolbar = Quill.import('modules/toolbar');
     var toolbarOptions = [
@@ -497,24 +529,24 @@
     var modal_new_language = document.getElementById("confirmation_new_language");
 
     $("#back").click(function(){
-  			location.href = "add_story";
+  		location.href = "add_story";
   	});
 
   	$("#save").click(function(){
-      if (new_language) {
-        modal_new_language.style.display = "block";
-      } else {
-        modal.style.display = "block";
-      }
+      modal.style.display = "block";
   	});
 
+    $("#save_new_language").click(function() {
+      modal_new_language.style.display = "block";
+    })
+
     $("#close").click(function(){
-  		if (new_language) {
-        modal_new_language.style.display = "none";
-      } else {
-        modal.style.display = "none";
-      };
+      modal.style.display = "none";
   	});
+
+    $("#close_new_language").click(function() {
+      modal_new_language.style.display = "none";
+    })
 
     $("#submit").click(function(){
         arr = $("#f").serializeArray();
