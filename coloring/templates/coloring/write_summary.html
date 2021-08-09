@@ -22,7 +22,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Mulish&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <style type="text/css">
 
       /* Wood texture background image source: ArtStation (image by Martin Novák) - https://www.artstation.com/artwork/yrNwn
@@ -352,7 +352,7 @@
           <div id="button-bar"><button id="save"><h2>Save Summary</h2></button></div>
         </div>
 
-          <!-- modal without neww language-->
+          <!-- modal without new language-->
           <div class="modal" id="confirmation">
             <div class="modal-content">
               <div id="modal-bar">
@@ -423,7 +423,7 @@
       if (sessionStorage.getItem("makingNewStory") == "false") {
         getWriters(sessionStorage.getItem("token"),cb)
       }
-      
+
       languageDropdown();
     }
     function cb(wret) {
@@ -535,7 +535,7 @@
         } else {
           newStory(arr[0].value,sessionStorage.getItem("genre"),arr[2].value,sessionStorage.getItem("story"),newSummary,cb2)
         }
-  			
+
   	});
     function cb2(){
       getAll()

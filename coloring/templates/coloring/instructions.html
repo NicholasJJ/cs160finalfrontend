@@ -9,16 +9,17 @@
     <link rel="stylesheet" type="text/css" href="{% static '/vendors/bootstrap/css/bootstrap.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}" />
 
-	<script src="{% static '/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+  	<script src="{% static '/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static '/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
 
     <style type="text/css">
+
     #icon-return{
         margin: 0 0 0 1vw;
         background: #B2B8AD;
@@ -31,16 +32,13 @@
         color: #1B1211;
         text-align: center;
     }
-    
+
     button {
-        background-color: #7e695a;
-        opacity: 0.58;
+        opacity: 0.7;
+        background-color: #b2b8ad;
         border: 1px hidden;
-        color: white;
         text-align: center;
-        font-size: 16px;
-        border-radius: 8px;
-        box-shadow: 1px 1px 6px 1px #cccccc;
+        border-radius: 10px;
       }
 
     button:focus {
@@ -65,26 +63,54 @@
     .ladder {
         width: 40%;
     }
-    
+
     #genre {
         background-color: #7e695a;
     }
 	#header{
 			width: 100%;
-			height: 10vh;
+			height: 7.2vh;
 			background-color: #D0D6CA;
+      box-shadow: 0 2px 6px -1px #b2b8ad;
 	}
+
+  /* Home icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Ahome%3A */
 	#homebtn{
 		position: absolute;
 		top: 50%;
-		transform: translate(1vw,-50%);
-		width: 7vh;
-		height: 7vh;
-		background-color: transparent;
-		border: none;
-		background-image: url(./../static/images/home.png);
-		background-size: 100% 100%;
+		transform: translate(1.6vw,-50%);
+		width: 5vh;
+		height: 5vh;
+    text-align: center;
+    background-image: url("/static/images/home_black_48dp.svg");
+    background-position: center;
+    background-repeat: no-repeat;
 	}
+
+  #homebtn:hover {
+    background-color: #91998A;
+    opacity: 0.7;
+    background-image: url("/static/images/home_black_48dp.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  #title {
+    font-family: "Raleway";
+    font-weight: 500;
+    color: #1b1211;
+  }
+
+  li {
+    font-family: "Mulish";
+    font-weight: 600;
+  }
+
+  h2 {
+    font-family: "Mulish";
+    font-weight: 700;
+  }
+
     </style>
 
 </head>
@@ -97,44 +123,45 @@
 			</div>
 			<div class="col-3"></div>
 			<div class="col-4">
-				<div style="text-align:center; margin: auto; font-size: 6.5vh;">Instructions</div>
+				<div id="title" style="text-align:center; margin: 0.7vh auto; font-size: 3.6vh; margin-top: 0.85vh;">Instructions</div>
 			</div>
 			<div class="col-4"></div>
 		</div>
 		<div class="row">
-			<div style="background-color: #F2F0ED; padding: 3% 3% 3% 3%; margin: auto; width: 95vw; margin-top: 3vh; font-size: 2vh;">
-				<b style="font-size: 3vh;">Contributing to a story:</b>
+			<div style="background-color: #F2F0ED; padding: 2.5% 3% 2.5% 3%; margin: auto; width: 95vw; margin-top: 3.2vh; font-size: 2.2vh;">
+				<h2 style="font-size: 2.7vh;">Contributing to a story:</h2>
 				<ul>
 					<li>
-						To contribute to a story, click the “Contribute to a Story” button. Choose the language that you would like to practice, and choose your preferred story genre.
-					</li>
+						To contribute to a story, click on the “Contribute to a Story” button. Choose the language that you would like to practice, and choose your preferred story genre.
+					<ul>
 					<li>
-						If a story matches your chosen genre and has its last section written in your chosen language, then you will see the story on a scroll, along with a “Continue Story” button at the bottom of the page. Otherwise, you will see a blank scroll, along with a “Start Story” button at the bottom of the page. Click on the button at the bottom of the page to navigate to the editor page, where you can continue the story or start the story by writing in your primary language. 
+						If a story matches your chosen genre and has its last section written in your chosen language, then you will see the story on a scroll, along with a “Continue Story” button at the bottom of the page. Otherwise, you will see a blank scroll, along with a “Start Story” button at the bottom of the page. Click on the button at the bottom of the page to navigate to the editor page, where you can continue the story or start the story by writing in your primary language.
 					</li>
 					<li>
 						If you are continuing the story, refer to the summary written in your chosen language to determine earlier plot points of the story.
 					</li>
 					<li>
-						When you are finished contributing to the story, click the “Add to Story” button. If a summary exists, translate the summary and write an updated summary of the story in your primary language. Otherwise, simply write a summary of the story in your primary language. 
+						When you are finished contributing to the story, click on the “Add to Story” button. If a summary exists, translate the summary and write an updated summary of the story in your primary language. Otherwise, simply write a summary of the story in your primary language.
 					</li>
 					<li>
-						Lastly, click on the “Save Summary” button. In the confirmation box, indicate what language you wrote in, whether you have concluded the story, and if desired, write your name to be included in the list of contributors of the story. Click the “Submit” button to submit the story and its summary.
+						Lastly, click on the “Save Summary” button. In the confirmation box, indicate what language you wrote in, whether you have concluded the story, and if desired, write your name to be included in the list of contributors of the story. Click on the “Submit” button to submit the story and its summary.
 					</li>
 				</ul>
+        </li>
+        </ul>
 			</div>
 		</div>
 		<div class="row">
-			<div style="background-color: #F2F0ED; padding: 3% 3% 3% 3%; margin: auto; width: 95vw; margin-top: 3vh; font-size: 2vh;">
-				<b style="font-size: 3vh;">Viewing a story:</b>
+			<div style="background-color: #F2F0ED; padding: 2.5% 3% 2.5% 3%; margin: auto; width: 95vw; margin-top: 3vh; font-size: 2.2vh;">
+				<h2 style="font-size: 2.7vh;">Viewing a story:</h2>
 				<ul>
 					<li>
-						To contribute to a story, click the “Contribute to a Story” button. Choose the language that you would like to practice, and choose your preferred story genre.
-					</li>
-					</li>
+						To view stories written in multiple different languages, click on the “Gallery” button.
+					<ul>
 					<li>
 						Click on a scroll in the gallery to unroll it and reveal a story.
 					</li>
-					<li>
+          <li>
 						Read and explore the story written in multiple different languages.
 					</li>
 					<li>
@@ -144,13 +171,14 @@
 						A list of the contributors of the story is displayed at the bottom of the page.
 					</li>
 				</ul>
+        </li>
+        </ul>
 			</div>
 		</div>
-        
+
 	</div>
 	<br>
-	<br>
-    
+
 </body>
 
 <script>
