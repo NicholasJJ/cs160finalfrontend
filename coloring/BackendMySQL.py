@@ -141,6 +141,7 @@ def register(request):
 
 @csrf_exempt
 def uploadText(request):
+    print(request)
     if request.method != 'POST':
         return django.http.JsonResponse({
         "result":-100,
@@ -162,6 +163,7 @@ def uploadText(request):
 
 @csrf_exempt
 def replaceText(request):
+    print(request)
     if request.method != 'POST':
         return django.http.JsonResponse({
         "result":-100,
@@ -228,7 +230,7 @@ def getTokenByInfo(request):
     })
     db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
     cursor = db.cursor()
-    req = "SELECT Article_ID FROM UserInformation.Ariticle_Storage where LastPart_Language = %s and Genre = %s"
+    req = "SELECT Article_ID FROM UserInformation.Ariticle_Storage where Finished = '0' and LastPart_Language = %s and Genre = %s"
     params = (request.GET["Language"], request.GET["Genre"])
     cursor.execute(req, params)
     data = cursor.fetchall()
@@ -255,7 +257,7 @@ def getTokenGallery(request):
     })
     db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
     cursor = db.cursor()
-    req = "SELECT Article_ID FROM UserInformation.Ariticle_Storage where Finished = 1"
+    req = "SELECT Article_ID FROM UserInformation.Ariticle_Storage where Finished = '1'"
     cursor.execute(req)
     data = cursor.fetchall()
     if (data == None) :

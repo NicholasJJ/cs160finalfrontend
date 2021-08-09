@@ -444,7 +444,7 @@
   </body>
 
   <script>
-    writers = ""
+    writers = []
     window.onload = function(){
       h = sessionStorage.getItem("story");
       s = document.getElementById("story");
@@ -547,32 +547,36 @@
     $("#close_new_language").click(function() {
       modal_new_language.style.display = "none";
     })
-
+    function cb2(){
+      getAll()
+      // location.href = "landing";
+    }
     $("#submit_new_language").click(function(){
         arr = $("#f_new_language").serializeArray();
         console.log(arr)
         // console.log(arr[0].value);
         // console.log(arr[1].value);
         // console.log(arr[2].value);
-        finished = 0;
+        finished = "0";
         if (arr[1].value == "Yes") {
-          finished = 1;
+          finished = "1";
         }
         newSummary = editor.root.innerHTML;
         if (arr[2].value.length == 0) {
             arr[2].value = "Anonymous"
         }
         if (sessionStorage.getItem("makingNewStory") == "false") {
-          writers += "  " + arr[2].value
-          replaceStory(sessionStorage.getItem("token"),arr[0].value,writers,sessionStorage.getItem("story"),newSummary,finished,cb2)
+          writers.push(arr[2].value)
+          console.log(writers);
+          replaceStory(sessionStorage.getItem("token"),arr[0].value,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,finished,cb2)
         } else {
-          newStory(arr[0].value,sessionStorage.getItem("genre"),arr[2].value,sessionStorage.getItem("story"),newSummary,cb2)
+          writers = []
+          writers.push(arr[2].value)
+          console.log(writers);
+          newStory(arr[0].value,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,cb2)
         }
 
   	});
-    function cb2(){
-      getAll()
-      // location.href = "landing";
-    }
+    
   </script>
   </html>
