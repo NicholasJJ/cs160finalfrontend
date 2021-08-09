@@ -81,6 +81,10 @@
 				text-align: center;
 			}
 
+      button:hover {
+				background-color: #D4D4CF;
+			}
+
 			.label-bar {
 				margin-top: -50px;
 				text-align: center;
@@ -163,7 +167,7 @@
       }
 
       #contributors {
-        width: 80%;
+        width: 60%;
         height: auto;
         background-color: #e6dfd5;
         border: 1px solid #bdb4b1;
@@ -175,6 +179,7 @@
         padding-right: 52px;
         padding-bottom: 42px;
         text-align: left;
+        overflow-y: auto;
       }
 
       .modal {
@@ -228,6 +233,10 @@
         margin-bottom: -20px;
       }
 
+      p {
+        margin: 0 0 0 0;
+      }
+
     </style>
   </head>
 
@@ -235,18 +244,31 @@
 		<div id="top-bar">
 			<!-- Back icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aarrow_back%3A -->
 			<input type="image" id="back" src="/static/images/arrow_back_black_48dp.svg"></input>
+      <div class="label-bar">
+        <div id="button-bar">
+          <h1>View Story</h1>
+        </div>
+		  </div>
 		</div>
-		<div class="label-bar">
-		 <div id="button-bar"><button id="summary"><h2>View Summary</h2></button></div>
-		</div>
+
+    <div class = "row align-items-center justify-content-center" style = "padding-top: 2vh">
+      <button id="summary">
+        <h2>Summary</h2>
+      </button>
+    </div>
+
     <div id="scroll-top">
       <img src="/static/images/scroll-top.png" width="832px" height="38px">
       <div id="story" class="ql-editor" data-gramm="false" contenteditable="false" spellcheck="false"></div>
+    </div>
+    <div id="header" style = "padding-left: 10vw">
+      <h2>Contributors</h2>
+    </div>
+    <div id="footer">
+      <div id="contributors" style = "text-align: center">
+
       </div>
-      <div id="header"><h2>Contributors</h2></div>
-      <div id="footer">
-      <div id="contributors"></div>
-      </div>
+    </div>
 
       <div class="modal" id="confirmation">
         <div class="modal-content">
@@ -264,7 +286,9 @@
   </body>
 
   <script>
-  var experiment = false;
+  // experiment boolean - set to true if conducting the experiments
+  var experiment = true;
+
   writtenStory = ""
   writtenSummary = ""
   writtenWriters = ""
@@ -277,10 +301,21 @@
       writtenStory = sessionStorage.getItem("viewStory");
       writtenSummary = sessionStorage.getItem("viewSummary");
       writtenWriters = sessionStorage.getItem("viewWriters");
-      console.log(writtenWriters);
     }
     document.getElementById("story").innerHTML = writtenStory;
     document.getElementById("summary-box").innerHTML = writtenSummary;
+    formatContributors(writtenWriters);
+  }
+
+  function formatContributors(writtenWritters) {
+    writersList = writtenWritters.split(".");
+    console.log(writersList);
+    for (var i = 0; i < writersList.length; i++) {
+      var p = document.createElement("p");
+      p.innerHTML = writersList[i];
+      console.log(p);
+      document.getElementById("contributors").appendChild(p);
+    }
   }
 
   var modal = document.getElementById("confirmation");
