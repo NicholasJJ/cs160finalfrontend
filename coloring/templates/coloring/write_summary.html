@@ -504,7 +504,7 @@
     });
 
     // boolean - true if the user is writing in a new language
-    var new_language = false;
+    var new_language = true;
 
     var Toolbar = Quill.import('modules/toolbar');
     var toolbarOptions = [
@@ -556,6 +556,14 @@
     $("#submit_new_language").click(function(){
         console.log("submit new language");
         arr = $("#f_new_language").serializeArray();
+        if (arr.length < 3) {
+          alert("Please mark if you ended the story")
+          return
+        }
+        if (arr[0].value == "") {
+          alert("Please enter the language")
+          return
+        }
         console.log(arr)
         // console.log(arr[0].value);
         // console.log(arr[1].value);
@@ -582,12 +590,18 @@
   	});
     $("#submit").click(function(){
         console.log("regular submit")
+        arr = $("#f").serializeArray();
+        if (arr.length < 3) {
+          alert("Please mark if you ended the story")
+          return
+        }
         var x = document.createElement("input");
         var inputLanguage = $("#languageDropdown").find(":selected").text();
         $("#f").prepend(x);
         inputLanguage = inputLanguage.split(/(\s+)/)[0];
         console.log(inputLanguage)
-        arr = $("#f").serializeArray();
+        
+
         console.log(arr)
         // console.log(arr[0].value);
         // console.log(arr[1].value);
