@@ -241,7 +241,7 @@
 		</div>
     <div id="scroll-top">
       <img src="/static/images/scroll-top.png" width="832px" height="38px">
-      <div id="story"></div>
+      <div id="story" class="ql-editor" data-gramm="false" contenteditable="false" spellcheck="false"></div>
       </div>
       <div id="header"><h2>Contributors</h2></div>
       <div id="footer">
@@ -257,7 +257,7 @@
          <div id="summary-title">
           <h2> Summary </h2>
           </div>
-          <div id="summary-box"></div>
+          <div id="summary-box" class="ql-editor" data-gramm="false" contenteditable="false" spellcheck="false"></div>
       </div>
     </div>
 
@@ -274,7 +274,8 @@
     writtenStory = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut tristique nulla. Phasellus id euismod dolor. Aliquam erat volutpat. Praesent ut semper turpis, a convallis quam. Curabitur sit amet velit tristique, tempor massa pellentesque, commodo tortor. Nullam eu justo metus. Duis tristique pulvinar lacinia. Quisque interdum mauris dui, et consequat diam sollicitudin ac. Morbi convallis turpis ut semper tempor. Vivamus euismod lectus elit, nec molestie eros semper ut. Vestibulum viverra semper risus, vel blandit massa ultrices consequat. Quisque eu hendrerit ligula. Duis ac rutrum magna, vehicula bibendum nibh. Nulla sed ante ut libero dignissim pulvinar. Nullam ullamcorper non nisi rutrum pharetra"
     writtenSummary = "This is the summary"
     writtenWriters = "Alice.Bob.Carol"
-    
+    document.getElementById("story").innerHTML = writtenStory;
+    document.getElementById("summary-box").innerHTML = writtenSummary;
   }
 
   var modal = document.getElementById("confirmation");
