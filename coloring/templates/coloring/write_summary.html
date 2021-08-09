@@ -381,7 +381,7 @@
         <div id="line"></div>
         <div id="wrapper">
           <div id="editor"><p>Write your summary by replacing this text</p></div>
-          <div id="button-bar"><button id="save_new_language"><h2>Save Summary</h2></button></div>
+          <div id="button-bar"><button id="save"><h2>Save Summary</h2></button></div>
         </div>
 
           <!-- modal without new language-->
@@ -533,12 +533,14 @@
   	});
 
   	$("#save").click(function(){
-      modal.style.display = "block";
+      console.log("#save");
+      if (new_language) {
+        modal_new_language.style.display = "block";
+      } else {
+        modal.style.display = "block";
+      }
+      
   	});
-
-    $("#save_new_language").click(function() {
-      modal_new_language.style.display = "block";
-    })
 
     $("#close").click(function(){
       modal.style.display = "none";
@@ -552,7 +554,16 @@
       // location.href = "landing";
     }
     $("#submit_new_language").click(function(){
+        console.log("submit new language");
         arr = $("#f_new_language").serializeArray();
+        if (arr.length < 3) {
+          alert("Please mark if you ended the story")
+          return
+        }
+        if (arr[0].value == "") {
+          alert("Please enter the language")
+          return
+        }
         console.log(arr)
         // console.log(arr[0].value);
         // console.log(arr[1].value);
@@ -574,6 +585,44 @@
           writers.push(arr[2].value)
           console.log(writers);
           newStory(arr[0].value,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,cb2)
+        }
+
+  	});
+    $("#submit").click(function(){
+        console.log("regular submit")
+        arr = $("#f").serializeArray();
+        if (arr.length < 3) {
+          alert("Please mark if you ended the story")
+          return
+        }
+        var x = document.createElement("input");
+        var inputLanguage = $("#languageDropdown").find(":selected").text();
+        $("#f").prepend(x);
+        inputLanguage = inputLanguage.split(/(\s+)/)[0];
+        console.log(inputLanguage)
+        
+
+        console.log(arr)
+        // console.log(arr[0].value);
+        // console.log(arr[1].value);
+        // console.log(arr[2].value);
+        finished = "0";
+        if (arr[0].value == "Yes") {
+          finished = "1";
+        }
+        newSummary = editor.root.innerHTML;
+        if (arr[1].value.length == 0) {
+            arr[1].value = "Anonymous"
+        }
+        if (sessionStorage.getItem("makingNewStory") == "false") {
+          writers.push(arr[1].value)
+          console.log(writers);
+          replaceStory(sessionStorage.getItem("token"),inputLanguage,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,finished,cb2)
+        } else {
+          writers = []
+          writers.push(arr[1].value)
+          console.log(writers);
+          newStory(inputLanguage,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,cb2)
         }
 
   	});
