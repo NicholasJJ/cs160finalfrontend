@@ -69,11 +69,13 @@
 			transform: translate(1vw,-50%);
 			width: 7vh;
 			height: 7vh;
-			background-color: transparent;
-			border: none;
-			background-image: url(./../static/images/home.png);
-			background-size: 100% 100%;
+        	opacity: 0.7;
+			background-color: #b2b8ad;
 		}
+
+		#homebtn:hover {
+			background-color: #91998A;
+      }
 	</style>
 </head>
 <body style="overflow-x: hidden; margin: 0 0 0 0">
@@ -97,7 +99,7 @@
 	<div class="containter-fluid">
 		<div id="header" class="row" style="margin: 0 0 0 0">
 			<div class="col-1" style="padding: 0 0 0 0;">
-				<button id="homebtn" onclick="location.href = 'landing'"></button>
+				<input type="image" id="homebtn" src="/static/images/home_black_48dp.svg"></input>
 			</div>
 			<div class="col-3"></div>
 			<div class="col-4">
