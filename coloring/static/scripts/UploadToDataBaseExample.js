@@ -113,3 +113,15 @@ function getWriters(token,cb) {
       });
 }
 
+function getAll() {
+    var settings = {
+        "url": "http://localhost:8000/coloring/getAll",
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
+
