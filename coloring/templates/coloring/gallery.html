@@ -5,6 +5,7 @@
 <head>
 	<title>Gallery</title>
 	<script type="text/javascript" src="./../static/vendors/jquery/jquery-3.3.1.min.js"></script>
+	<script src="{% static '/scripts/UploadToDataBaseExample.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="./../static/vendors/bootstrap/css/bootstrap.css" />
 	<style type="text/css">
 		body {
@@ -125,7 +126,26 @@
 	b = document.getElementById("back");
 
 	function goToBook(bookNumber) {
-		alert($(bookNumber).attr("val"))
+		// alert($(bookNumber).attr("val"))
+		getAll();
+		getTokenRandom(cb);
+	}
+	var tok
+	function cb (token) {
+		tok = token;
+		getStory(tok,cb2);
+	}
+	function cb2 (story) {
+		sessionStorage.setItem("viewStory",story);
+		getSummary(tok,cb3);
+	}
+	function cb3 (summary) {
+		sessionStorage.setItem("viewSummary",summary);
+		getWriters(tok,cb4);
+	}
+	function cb4 (writers) {
+		sessionStorage.setItem("viewWriters",writers);
+		location.href = "view_book";
 	}
 
 	window.onload = function(event) {

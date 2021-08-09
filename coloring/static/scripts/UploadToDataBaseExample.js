@@ -71,6 +71,21 @@ function getToken(genre, language, cb) {
       });
 }
 
+
+function getTokenRandom(cb) {
+  var settings = {
+      "url": "http://localhost:8000/coloring/getTokenGallery",
+      "method": "GET",
+      "timeout": 0,
+    };
+    $.ajax(settings).done(function (response) {
+      if (response.result == 0) {
+          //RETURN A LIST OF ID, U NEED TO RANDOM CHOOSE ONE
+          return cb(response.id)
+      } else return cb(-1)
+    });
+}
+
 function getStory(token,cb) {
     var settings = {
         "url": "http://localhost:8000/coloring/getText?id=" + token,
