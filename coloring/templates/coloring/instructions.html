@@ -43,6 +43,10 @@
         box-shadow: 1px 1px 6px 1px #cccccc;
       }
 
+	button:hover {
+		background-color: #D4D4CF;
+	}
+
     button:focus {
         outline: none;
         border: 1px solid #524b47;
@@ -80,11 +84,13 @@
 		transform: translate(1vw,-50%);
 		width: 7vh;
 		height: 7vh;
-		background-color: transparent;
-		border: none;
-		background-image: url(./../static/images/home.png);
-		background-size: 100% 100%;
+        opacity: 0.7;
+		background-color: #b2b8ad;
 	}
+
+	#homebtn:hover {
+		background-color: #91998A;
+     }
     </style>
 
 </head>
@@ -93,7 +99,7 @@
     <div class="containter-fluid" >
 		<div id="header" class="row" style="margin: 0 0 0 0">
 			<div class="col-1" style="padding: 0 0 0 0;">
-				<button id="homebtn" onclick="location.href = 'landing'"></button>
+				<input type="image" id="homebtn" src="/static/images/home_black_48dp.svg" onclick = "location.href = 'landing'"></input>
 			</div>
 			<div class="col-3"></div>
 			<div class="col-4">
@@ -103,7 +109,7 @@
 		</div>
 		<div class="row">
 			<div style="background-color: #F2F0ED; padding: 3% 3% 3% 3%; margin: auto; width: 95vw; margin-top: 3vh; font-size: 2vh;">
-				<b style="font-size: 3vh;">Contributing to a story:</b>
+				<b style="font-size: 3vh;">How to contributing to a story:</b>
 				<ul>
 					<li>
 						To contribute to a story, click the “Contribute to a Story” button. Choose the language that you would like to practice, and choose your preferred story genre.
@@ -125,7 +131,7 @@
 		</div>
 		<div class="row">
 			<div style="background-color: #F2F0ED; padding: 3% 3% 3% 3%; margin: auto; width: 95vw; margin-top: 3vh; font-size: 2vh;">
-				<b style="font-size: 3vh;">Viewing a story:</b>
+				<b style="font-size: 3vh;">How to view a story:</b>
 				<ul>
 					<li>
 						To contribute to a story, click the “Contribute to a Story” button. Choose the language that you would like to practice, and choose your preferred story genre.

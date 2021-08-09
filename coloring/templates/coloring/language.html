@@ -10,10 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap" rel="stylesheet">
 	<style type="text/css">
-    .icon-return{
+    .icon-return {
         margin: 0 0 0 1vw;
         background: #B2B8AD;
+    }
 
+    .icon-return:hover {
+        background: #91998A;
     }
 
     .choose-language {
@@ -22,9 +25,7 @@
       font-weight: 500;
       font-size: 3vw;
       text-align: center;
-
       color: #1B1211;
-
     }
 
     .grid {
@@ -72,6 +73,10 @@
      font-style: normal;
      font-weight: 500;
      font-size: 2vw;
+    }
+
+    .select-button:hover {
+     background-color: #D4D4CF;
     }
 
     #top-box {
@@ -125,6 +130,11 @@
       background-color: #A6ACA1;
       border: 0.25vmin solid #F2F0ED;
       box-sizing: border-box;
+    }
+
+    .language-button:hover {
+      background-color: #7D8873;
+      border: 0.25vmin solid #5A4442;
     }
 
     .language-button:focus {
@@ -215,12 +225,16 @@
   }
 
   function addLanguage() {
+    var count = 0;
     var ladder = document.getElementById("ladder");
     allLanguages.forEach(function(value, key){
       var link = document.createElement("a");
       link.setAttribute("onclick", "updateLanguage('"+key.toString()+"', '"+value.toString()+"')");
+      
       var languageButton = document.createElement("div");
       languageButton.setAttribute("class", "language-button");
+      languageButton.setAttribute("style", "transform: translate(" + 3.6 * count + "vw)");
+
       var languageText = document.createElement("div");
       languageText.setAttribute("class", "language-text");
       languageText.setAttribute("style", "font-size: 4vh; color: #F2F0ED; text-align: center");
@@ -232,6 +246,12 @@
       languageButton.appendChild(languageText);
       link.appendChild(languageButton)
       ladder.appendChild(link);
+
+      if (count == 5) {
+        count = 0;
+      } else {
+        count = count + 1; 
+      }
     });
   }
 

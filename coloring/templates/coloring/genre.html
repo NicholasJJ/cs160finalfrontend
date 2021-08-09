@@ -12,7 +12,7 @@
 	<script src="{% static '/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static '/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
     <script src="{% static '/scripts/UploadToDataBaseExample.js' %}"></script>
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
@@ -22,12 +22,17 @@
         background: #B2B8AD;
     }
 
+    #icon-return:hover {
+        background: #91998A;
+    }
+
     #choose-genre {
-        font-family: "Mulish";
-        font-size: 4vw;
-        font-weight: 400;
-        color: #1B1211;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 3vw;
         text-align: center;
+        color: #1B1211;
     }
 
     h1 {
@@ -36,22 +41,6 @@
         font-weight: 400;
         color: #1b1211;
         text-align: center;
-    }
-
-    button {
-        background-color: #7e695a;
-        opacity: 0.58;
-        border: 1px hidden;
-        color: white;
-        text-align: center;
-        font-size: 16px;
-        border-radius: 8px;
-        box-shadow: 1px 1px 6px 1px #cccccc;
-      }
-
-    button:focus {
-        outline: none;
-        border: 1px solid #524b47;
     }
 
     .grid {
@@ -82,7 +71,7 @@
     #genreBtn:hover {
         width: 35vw;
         height: 10vh;
-	    background: #A6ACA1;
+        background-color: #7D8873;
     }
 
     </style>
@@ -149,21 +138,17 @@
             row.setAttribute("class", "row align-items-center d-flex justify-content-center")
             row.setAttribute("style", "margin: 4vh 0 4vh 0")
 
-            var genreBtn = document.createElement("div");
+            var genreBtn = document.createElement("button");
 		    genreBtn.setAttribute("id", "genreBtn");
-            genreBtn.setAttribute("class", "align-items-center d-flex justify-content-center")
-
-		    var link = document.createElement("a");
-            link.setAttribute("class", "btn");
-            link.setAttribute("onclick", "selectGenre('"+allGenre[i]+"')");
+            genreBtn.setAttribute("class", "btn")
+            genreBtn.setAttribute("onclick", "selectGenre('"+allGenre[i]+"')");
 
             var genreName = document.createElement("p");
             genreName.setAttribute("id", allGenre[i]);
             genreName.setAttribute("style", "font-family: Mulish; font-size: 4vh; color: #F2F0ED");
             genreName.innerHTML = allGenre[i];
 
-            link.appendChild(genreName);
-		    genreBtn.appendChild(link);
+		    genreBtn.appendChild(genreName);
             row.appendChild(genreBtn);
             ladder.appendChild(row);
         }
