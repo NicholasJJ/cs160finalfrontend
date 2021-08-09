@@ -1,4 +1,4 @@
-function newStory(LastPart_Language, Genre, Name_Of_Writters, Story_Content, Story_Summary) {
+function newStory(LastPart_Language, Genre, Name_Of_Writters, Story_Content, Story_Summary,cb) {
     var Name_Of_Writters_Str = ""
     for (const v of Name_Of_Writters) {
         Name_Of_Writters_Str += String(v) + "."
@@ -23,10 +23,11 @@ function newStory(LastPart_Language, Genre, Name_Of_Writters, Story_Content, Sto
       
       $.ajax(settings).done(function (response) {
         console.log(response);
+        return cb();
       });
 }
 
-function replaceStory(token, last_Part_Language, genre, newWriter, storyContent, StorySummary, finished) {
+function replaceStory(token, last_Part_Language, genre, newWriter, storyContent, StorySummary, finished,cb) {
     var Name_Of_Writters_Str = ""
             for (const v of newWriter) {
                 Name_Of_Writters_Str += String(v) + "."
@@ -52,25 +53,25 @@ function replaceStory(token, last_Part_Language, genre, newWriter, storyContent,
       
       $.ajax(settings).done(function (response) {
         console.log(response);
+        return cb()
       });
 }
 
-function getToken(genre, language) {
+function getToken(genre, language, cb) {
     var settings = {
         "url": "http://localhost:8000/coloring/getTokenByInfo?Language=" + language + "&Genre=" + genre,
         "method": "GET",
         "timeout": 0,
       };
-      
       $.ajax(settings).done(function (response) {
         if (response.result == 0) {
             //RETURN A LIST OF ID, U NEED TO RANDOM CHOOSE ONE
-            return response.id
-        } else return -1
+            return cb(response.id)
+        } else return cb(-1)
       });
 }
 
-function getStory(token) {
+function getStory(token,cb) {
     var settings = {
         "url": "http://localhost:8000/coloring/getText?id=" + token,
         "method": "GET",
@@ -79,12 +80,12 @@ function getStory(token) {
       
       $.ajax(settings).done(function (response) {
         if (response.result == 0) {
-            return response.Story
-        } else return -1
+            return cb(response.Story)
+        } else return cb(-1)
       });
 }
 
-function getSummary(token) {
+function getSummary(token,cb) {
     var settings = {
         "url": "http://localhost:8000/coloring/getText?id=" + token,
         "method": "GET",
@@ -93,12 +94,12 @@ function getSummary(token) {
       
       $.ajax(settings).done(function (response) {
         if (response.result == 0) {
-            return response.Summary
-        } else return -1
+            return cb(response.Summary)
+        } else return cb(-1)
       });
 }
 
-function getWriters(token) {
+function getWriters(token,cb) {
     var settings = {
         "url": "http://localhost:8000/coloring/getText?id=" + token,
         "method": "GET",
@@ -107,8 +108,8 @@ function getWriters(token) {
       
       $.ajax(settings).done(function (response) {
         if (response.result == 0) {
-            return response.Writters
-        } else return -1
+            return cb(response.Writters)
+        } else return cb(-1)
       });
 }
 
