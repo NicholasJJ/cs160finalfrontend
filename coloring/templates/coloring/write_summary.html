@@ -381,7 +381,7 @@
         <div id="line"></div>
         <div id="wrapper">
           <div id="editor"><p>Write your summary by replacing this text</p></div>
-          <div id="button-bar"><button id="save"><h2>Save Summary</h2></button></div>
+          <div id="button-bar"><button id="save_new_language"><h2>Save Summary</h2></button></div>
         </div>
 
           <!-- modal without neww language-->
@@ -504,7 +504,7 @@
     });
 
     // boolean - true if the user is writing in a new language
-    var new_language = false;
+    var new_language = true;
 
     var Toolbar = Quill.import('modules/toolbar');
     var toolbarOptions = [
@@ -548,8 +548,8 @@
       modal_new_language.style.display = "none";
     })
 
-    $("#submit").click(function(){
-        arr = $("#f").serializeArray();
+    $("#submit_new_language").click(function(){
+        arr = $("#f_new_language").serializeArray();
         console.log(arr)
         // console.log(arr[0].value);
         // console.log(arr[1].value);
