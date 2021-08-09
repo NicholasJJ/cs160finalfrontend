@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<style type="text/css">
     .icon-return {
         margin: 0 0 0 1vw;
@@ -20,10 +22,10 @@
     }
 
     .choose-language {
-      font-family: Raleway;
+      font-family: "Raleway";
       font-style: normal;
       font-weight: 500;
-      font-size: 3vw;
+      font-size: 3.7vh;
       text-align: center;
       color: #1B1211;
     }
@@ -54,6 +56,7 @@
     #display {
         width: 30%;
         overflow-y:auto;
+				overflow-x: hidden;
     }
 
     body {
@@ -63,13 +66,13 @@
     .select-button {
      color: #1B1211;
      background-color: #B9B9AE;
-     border: 0.5vmin solid #F2F0ED;
+     border: 0.2vmin solid #F2F0ED;
      box-sizing: border-box;
-     box-shadow: 0px 1vmin 1vmin rgba(0, 0, 0, 0.25);
+     box-shadow: 0px 0.5vmin 0.5vmin rgba(0, 0, 0, 0.25);
      height: 10vh;
      width: 20vw;
      text-align: center;
-     font-family: Raleway;
+     font-family: "Raleway";
      font-style: normal;
      font-weight: 500;
      font-size: 2vw;
@@ -84,14 +87,14 @@
       margin: 10vh 0 0 0;
       height: 8vh;
       width: 20vw;
-      font-size: 3vw;
-      font-family: Raleway;
+      font-size: 3.8vh;
+      font-family: "Raleway";
       font-weight: 600;
       text-align: center;
       color: #F2F0ED;
-      border: 0.25vmin solid #5A4442;
+      border: 0.2vmin solid #5A4442;
       box-sizing: border-box;
-      box-shadow: 0px 1vmin 1vmin rgba(0, 0, 0, 0.25);
+      box-shadow: 0px 0.5vmin 0.5vmin rgba(0, 0, 0, 0.25);
     }
 
     #mid-box {
@@ -100,14 +103,14 @@
       height: 16vh;
       width: 20vw;
 
-      font-family: Raleway;
+      font-family: "Raleway";
       font-style: normal;
       font-weight: 500;
-      font-size: 3vw;
+      font-size: 4.2vh;
       text-align: center;
-      color: #000000;
+      color: #1B1211;
 
-      border: 0.25vmin solid #5A4442;
+      border: 0.2vmin solid #5A4442;
       box-sizing: border-box;
     }
 
@@ -117,7 +120,7 @@
       height: 4vh;
       width: 20vw;
       border-style: none solid solid solid;
-      border-width: 0.25vmin;
+      border-width: 0.2vmin;
       border-color: #5A4442;
       box-sizing: border-box;
     }
@@ -128,13 +131,13 @@
       height: 10vh;
       width: 20vw;
       background-color: #A6ACA1;
-      border: 0.25vmin solid #F2F0ED;
+      border: 0.2vmin solid #F2F0ED;
       box-sizing: border-box;
     }
 
     .language-button:hover {
-      background-color: #7D8873;
-      border: 0.25vmin solid #5A4442;
+      background-color: #838a7d;
+      border: 0.2vmin solid #5A4442;
     }
 
     .language-button:focus {
@@ -142,16 +145,45 @@
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
+		/* Back icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aarrow_back%3A */
+		#back{
+			position: absolute;
+			top: 50%;
+			transform: translate(0.9vw,-50%);
+			width: 5vh;
+			height: 5vh;
+	    text-align: center;
+	    background-image: url("/static/images/arrow_back_black_48dp.svg");
+	    background-position: center;
+	    background-repeat: no-repeat;
+			opacity: 0.7;
+			background-color: #b2b8ad;
+			border: 1px hidden;
+			text-align: center;
+			border-radius: 10px;
+		}
+
+	  #back:hover {
+	    background-color: #91998A;
+	    opacity: 0.7;
+	    background-image: url("/static/images/arrow_back_black_48dp.svg");
+	    background-position: center;
+	    background-repeat: no-repeat;
+	  }
+
+		#back:focus {
+			outline: none;
+			border: 1px solid #524b47;
+	  }
+
+
 	</style>
 </head>
 <body style="overflow-x: hidden;">
   <div class="container-fluid" >
-    <div class="row align-items-center justify-content-center" style="height: 8vh; background-color: #D0D6CA">
+    <div class="row align-items-center justify-content-center" style="height: 7.9vh; background-color: #D0D6CA; box-shadow: 0 2px 6px -1px #b2b8ad;">
       <div class = "col-2">
-          <svg class="icon-return" xmlns="http://www.w3.org/2000/svg" height="6vh" viewBox="0 0 24 24" fill="#1B1211">
-              <path d="M0 0h24v24H0V0z" fill="none"/>
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-          </svg>
+          <button id="back" onclick="location.href = 'landing'"></button>
       </div>
       <div class="col-8 choose-language">
           Choose Language
@@ -173,8 +205,8 @@
         </div>
         <div class = "row align-items-center justify-content-center">
           <div class="my-5">
-            <h3 id="top-box">Russian</h3>
-            <h3 id="mid-box">Русский язык</h3>
+            <h3 id="top-box">English</h3>
+            <h3 id="mid-box"><br>English</h3>
             <h3 id="bot-box"></h3>
           </div>
         </div>
@@ -230,14 +262,14 @@
     allLanguages.forEach(function(value, key){
       var link = document.createElement("a");
       link.setAttribute("onclick", "updateLanguage('"+key.toString()+"', '"+value.toString()+"')");
-      
+
       var languageButton = document.createElement("div");
       languageButton.setAttribute("class", "language-button");
       languageButton.setAttribute("style", "transform: translate(" + 3.6 * count + "vw)");
 
       var languageText = document.createElement("div");
       languageText.setAttribute("class", "language-text");
-      languageText.setAttribute("style", "font-size: 4vh; color: #F2F0ED; text-align: center");
+      languageText.setAttribute("style", "font-size: 3.8vh; color: #F2F0ED; text-align: center; font-family: 'Raleway'; font-weight: 500;");
 
       console.log(value);
       console.log(languageText);
@@ -250,7 +282,7 @@
       if (count == 5) {
         count = 0;
       } else {
-        count = count + 1; 
+        count = count + 1;
       }
     });
   }
@@ -260,7 +292,7 @@
     var top = document.getElementById("top-box");
     var mid = document.getElementById("mid-box");
     top.innerHTML = key;
-    mid.innerHTML = value;
+    mid.innerHTML = "<br>" + value;
     sessionStorage.setItem("language",key);
   }
 </script>
