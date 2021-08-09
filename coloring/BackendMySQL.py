@@ -198,6 +198,7 @@ def getText(request):
     cursor.execute("SELECT count( * ) FROM Ariticle_Storage WHERE `Article_ID` = %s;", (id,))
     data = cursor.fetchone()
     if data[0] < 1:
+        db.commit()
         db.close()
         return django.http.JsonResponse({
         "result":-400,
@@ -207,6 +208,7 @@ def getText(request):
         cursor.execute("select * from Ariticle_Storage where Article_ID = %s;", (id,))
         data = cursor.fetchone()
         print(data)
+        db.commit()
         db.close()
         return django.http.JsonResponse({
         "result":0,
@@ -257,12 +259,16 @@ def getTokenGallery(request):
     cursor.execute(req)
     data = cursor.fetchall()
     if (data == None) :
+        db.commit()
+        db.close()
         return django.http.JsonResponse({
             "result": 404,
             "msg": "No Article Fulfill this requirement",
             "id": -1
         })
     else:
+        db.commit()
+        db.close()
         results = [i[0] for i in data]
         return django.http.JsonResponse({
             "result": 0,
@@ -282,6 +288,8 @@ def getAll(request):
     req = "SELECT * FROM UserInformation.Ariticle_Storage"
     cursor.execute(req)
     data = cursor.fetchall()
+    db.commit()
+    db.close()
     return django.http.JsonResponse({
         "result": 0,
         "msg": "GotCha",
