@@ -360,8 +360,8 @@
         border: 1px solid #bdb4b1;
         border-radius: 8px;
         width: 82%;
-        margin-left: 74px;
-        padding-left: 14px;
+        margin-left: 75px;
+        padding-left: 15px;
         margin-top: 10px;
         margin-bottom: 15px;
       }
@@ -465,7 +465,7 @@
     function cb(wret) {
       console.log("got writers");
       writers = wret;
-      
+
       if (writers == -1){
         writers = []
       }
@@ -473,7 +473,7 @@
       console.log("getting languages");
       getLanguage(cbb);
     }
-    
+
     $("#languageDropdown").change(function (){
       var lan = $("#languageDropdown").find(":selected").text();
       console.log(lan);
@@ -513,7 +513,7 @@
     "Vietnamese [tiếng Việt]"
     ];
 
-    
+
 
     function languageDropdown() {
       var languageDropdown = document.getElementById("languageDropdown");
@@ -565,7 +565,7 @@
       // } else {
       //   modal.style.display = "block";
       // }
-      
+
   	});
 
     $("#close").click(function(){
@@ -594,11 +594,11 @@
         }
         var x = document.createElement("input");
         var inputLanguage = $("#languageDropdown").find(":selected").text();
-        $("#f").prepend(x);
+        //$("#f").prepend(x);
         inputLanguage = inputLanguage.split(/(\s+)/)[0];
         console.log(inputLanguage)
         if (inputLanguage == "Select-Language") {
-          alert("please select a language");
+          alert("Please select a language");
           return
         }
         if (inputLanguage == "New-Language") {
@@ -641,6 +641,6 @@
         newStory(languageVal,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,cb2)
       }
     }
-    
+
   </script>
   </html>

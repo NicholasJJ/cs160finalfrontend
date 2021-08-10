@@ -136,6 +136,16 @@
       box-sizing: border-box;
     }
 
+    .language-button-clicked {
+      margin: 0;
+      padding: 0;
+      height: 10vh;
+      width: 20vw;
+      background-color: #687060;
+      border: 0.2vmin solid #5A4442;;
+      box-sizing: border-box;
+    }
+
     .language-button:hover {
       background-color: #838a7d;
       border: 0.2vmin solid #5A4442;
@@ -280,11 +290,12 @@
     console.log(allLanguages);
     allLanguages.forEach(function(value, key){
       var link = document.createElement("a");
-      link.setAttribute("onclick", "updateLanguage('"+key.toString()+"', '"+value.toString()+"')");
 
       var languageButton = document.createElement("div");
       languageButton.setAttribute("class", "language-button");
+      languageButton.setAttribute("id", key.toString());
       languageButton.setAttribute("style", "transform: translate(" + 3.6 * count + "vw); overflow: auto");
+      languageButton.setAttribute("onclick", "updateLanguage('"+key.toString()+"', '"+value.toString()+"'); updateBackground('"+key.toString()+"')");
 
       var languageText = document.createElement("div");
       languageText.setAttribute("class", "language-text");
@@ -313,6 +324,22 @@
     top.innerHTML = key;
     mid.innerHTML = "<br>" + value;
     sessionStorage.setItem("language",key);
+  }
+
+  var buttonPrevious;
+
+  function updateBackground(languageButtonID) {
+    console.log("color change");
+    if (languageButtonID != buttonPrevious && buttonPrevious != null) {
+      var removeColor = document.getElementById(buttonPrevious);
+      removeColor.setAttribute("class", "language-button");
+    }
+    var languageBtn = document.getElementById(languageButtonID);
+    languageBtn.setAttribute("class", "language-button-clicked");
+    buttonPrevious = languageButtonID;
+
+    var top = document.getElementById("top-box");
+    top.setAttribute("style", "background-color: #687060");
   }
 </script>
 </html>
