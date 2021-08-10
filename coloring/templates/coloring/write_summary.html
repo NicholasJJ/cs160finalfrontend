@@ -594,11 +594,11 @@
         }
         var x = document.createElement("input");
         var inputLanguage = $("#languageDropdown").find(":selected").text();
-        $("#f").prepend(x);
+        //$("#f").prepend(x);
         inputLanguage = inputLanguage.split(/(\s+)/)[0];
         console.log(inputLanguage)
         if (inputLanguage == "Select-Language") {
-          alert("please select a language");
+          alert("Please select a language");
           return
         }
         if (inputLanguage == "New-Language") {
