@@ -75,7 +75,6 @@
      font-family: "Raleway";
      font-style: normal;
      font-weight: 500;
-     font-size: 2vw;
     }
 
     .select-button:hover {
@@ -95,6 +94,7 @@
       border: 0.2vmin solid #5A4442;
       box-sizing: border-box;
       box-shadow: 0px 0.5vmin 0.5vmin rgba(0, 0, 0, 0.25);
+			overflow: auto;
     }
 
     #mid-box {
@@ -112,6 +112,7 @@
 
       border: 0.2vmin solid #5A4442;
       box-sizing: border-box;
+			overflow: auto;
     }
 
     #bot-box {
@@ -180,6 +181,11 @@
 			border: 1px solid #524b47;
 	  }
 
+		#genre-text {
+			margin-top: 3vh;
+			font-size: 3vh;
+	  }
+
 
 	</style>
 </head>
@@ -205,7 +211,7 @@
 
       <div id = "display" class="py-5">
         <div class = "row align-items-center justify-content-center">
-          <div id = "genre" class="select-button">Choose Genre</div>
+          <div id = "genre" class="select-button"><h3 id="genre-text">Choose Genre</h3></div>
         </div>
         <div class = "row align-items-center justify-content-center">
           <div class="my-5">
@@ -258,12 +264,12 @@
 
   window.onload = function(event) {
     getLanguage(cb);
-    
+
   }
   function cb(response) {
     console.log(response.list_of_language);
     response.list_of_language.forEach(function(value,index){allLanguages.set(value,value)});
-    
+
     addLanguage();
     updateLanguage("English", "English");
   }
@@ -278,7 +284,7 @@
 
       var languageButton = document.createElement("div");
       languageButton.setAttribute("class", "language-button");
-      languageButton.setAttribute("style", "transform: translate(" + 3.6 * count + "vw)");
+      languageButton.setAttribute("style", "transform: translate(" + 3.6 * count + "vw); overflow: auto");
 
       var languageText = document.createElement("div");
       languageText.setAttribute("class", "language-text");
