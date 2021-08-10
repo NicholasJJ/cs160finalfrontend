@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <script src="{% static '/scripts/UploadToDataBaseExample.js' %}"></script>
 	<style type="text/css">
     .icon-return {
         margin: 0 0 0 1vw;
@@ -210,9 +210,9 @@
             <h3 id="bot-box"></h3>
           </div>
         </div>
-        <div class = "row align-items-center justify-content-center">
+        <!-- <div class = "row align-items-center justify-content-center">
           <div class="select-button">Add New Language</div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -228,6 +228,7 @@
   });
 
   const allLanguages = new Map([
+    ["Other", "Other"],
     ["Arabic", "العربية"],
     ["Bengali", "বাংলা"],
     ["Chinese", "中文"],
@@ -252,6 +253,13 @@
   ]);
 
   window.onload = function(event) {
+    getLanguage(cb);
+    
+  }
+  function cb(response) {
+    console.log(response.list_of_language);
+    response.list_of_language.forEach(function(value,index){allLanguages.set(value,value)});
+    
     addLanguage();
     updateLanguage("English", "English");
   }
@@ -259,6 +267,7 @@
   function addLanguage() {
     var count = 0;
     var ladder = document.getElementById("ladder");
+    console.log(allLanguages);
     allLanguages.forEach(function(value, key){
       var link = document.createElement("a");
       link.setAttribute("onclick", "updateLanguage('"+key.toString()+"', '"+value.toString()+"')");

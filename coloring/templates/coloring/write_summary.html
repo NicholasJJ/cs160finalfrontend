@@ -398,6 +398,8 @@
                       <option selected>Select-Language</option>
                     </select>
                   </div>
+                <h3> Language of Added Section: </h3>
+                <input type="text" class="modal-text" id="lang_new_language" name="lang"></input>
                 <h3> Did you end the story? </h3>
                 <label for="yes">
                   <input type="radio" class="radio" id="yes" name="end" value="Yes"><h4>Yes</h4>
@@ -409,32 +411,6 @@
                 <input type="text" class="modal-text" id="name" name="name"></input>
                 <div id="modal-button-bar">
                   <input type="submit" id="submit" value="Sumbit Story">
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <!-- modal with new language-->
-          <div class="modal" id="confirmation_new_language">
-            <div class="modal-content">
-              <div id="modal-bar">
-                <!-- Close icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aclose%3A -->
-                <input type="image" id="close_new_language" src="/static/images/close_black_48dp.svg"></input>
-      		    </div>
-              <form id="f_new_language" onsubmit="return false">
-                <h3> Language of Added Section: </h3>
-                  <input type="text" class="modal-text" id="lang_new_language" name="lang"></input>
-                <h3> Did you end the story? </h3>
-                <label for="yes">
-                  <input type="radio" class="radio" id="yes_new_language" name="end" value="Yes"><h4>Yes</h4>
-                </label>
-                  <label for="no">
-                  <input type="radio" class="radio" id="no_new_language" name="end" value="No"><h4>No</h4>
-                </label>
-                <h3> (Optional) Your Name: </h3>
-                <input type="text" class="modal-text" id="name_new_language" name="name"></input>
-                <div id="modal-button-bar">
-                  <input type="submit" id="submit_new_language" value="Sumbit Story">
                 </div>
               </form>
             </div>
@@ -460,6 +436,12 @@
     }
     function cb(wret) {
       writers = wret;
+      
+      getLanguage(cb2);
+    }
+    function cb2(response){
+      console.log(response.list_of_language);
+      response.list_of_language.forEach(function(value,index){allLanguages.set(value,value)});
       console.log("DONE!");
     }
 
@@ -503,9 +485,6 @@
       $('.dropdown-select').text(getValue);
     });
 
-    // boolean - true if the user is writing in a new language
-    var new_language = true;
-
     var Toolbar = Quill.import('modules/toolbar');
     var toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -534,11 +513,12 @@
 
   	$("#save").click(function(){
       console.log("#save");
-      if (new_language) {
-        modal_new_language.style.display = "block";
-      } else {
-        modal.style.display = "block";
-      }
+      modal.style.display = "block";
+      // if (new_language) {
+      //   modal_new_language.style.display = "block";
+      // } else {
+      //   modal.style.display = "block";
+      // }
       
   	});
 
@@ -549,45 +529,16 @@
     $("#close_new_language").click(function() {
       modal_new_language.style.display = "none";
     })
+    function cb3() {
+      storeAndLeave();
+    }
     function cb2(){
       getAll()
       // location.href = "landing";
     }
-    $("#submit_new_language").click(function(){
-        console.log("submit new language");
-        arr = $("#f_new_language").serializeArray();
-        if (arr.length < 3) {
-          alert("Please mark if you ended the story")
-          return
-        }
-        if (arr[0].value == "") {
-          alert("Please enter the language")
-          return
-        }
-        console.log(arr)
-        // console.log(arr[0].value);
-        // console.log(arr[1].value);
-        // console.log(arr[2].value);
-        finished = "0";
-        if (arr[1].value == "Yes") {
-          finished = "1";
-        }
-        newSummary = editor.root.innerHTML;
-        if (arr[2].value.length == 0) {
-            arr[2].value = "Anonymous"
-        }
-        if (sessionStorage.getItem("makingNewStory") == "false") {
-          writers.push(arr[2].value)
-          console.log(writers);
-          replaceStory(sessionStorage.getItem("token"),arr[0].value,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,finished,cb2)
-        } else {
-          writers = []
-          writers.push(arr[2].value)
-          console.log(writers);
-          newStory(arr[0].value,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,cb2)
-        }
-
-  	});
+    finishedVal = ""
+    languageVal = ""
+    writerVal = ""
     $("#submit").click(function(){
         console.log("regular submit")
         arr = $("#f").serializeArray();
@@ -600,32 +551,46 @@
         $("#f").prepend(x);
         inputLanguage = inputLanguage.split(/(\s+)/)[0];
         console.log(inputLanguage)
-        
-
-        console.log(arr)
-        // console.log(arr[0].value);
-        // console.log(arr[1].value);
-        // console.log(arr[2].value);
-        finished = "0";
-        if (arr[0].value == "Yes") {
-          finished = "1";
-        }
-        newSummary = editor.root.innerHTML;
-        if (arr[1].value.length == 0) {
-            arr[1].value = "Anonymous"
-        }
-        if (sessionStorage.getItem("makingNewStory") == "false") {
-          writers.push(arr[1].value)
-          console.log(writers);
-          replaceStory(sessionStorage.getItem("token"),inputLanguage,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,finished,cb2)
+        if (inputLanguage == "Select-Language") {
+          if (arr[0].value == "") {
+            alert("Please specify the language you wrote in");
+            return;
+          }
+          inputLanguage = arr[0].value;
+          finishedVal = arr[1].value;
+          languageVal = arr[0].value;
+          writerVal = arr[2].value;
+          addLanguage(arr[0].value,cb3)
         } else {
-          writers = []
-          writers.push(arr[1].value)
-          console.log(writers);
-          newStory(inputLanguage,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,cb2)
+          finishedVal = arr[1].value;
+          languageVal = inputLanguage;
+          writerVal = arr[2].value;
+          storeAndLeave();
         }
-
   	});
+    function storeAndLeave(){
+      finished = "0";
+      if (finishedVal == "Yes") {
+        finished = "1";
+      }
+      newSummary = editor.root.innerHTML;
+      if (writerVal.length == 0) {
+          writerVal = "Anonymous"
+      }
+      console.log(languageVal);
+      console.log(writerVal);
+      console.log(finished);
+      if (sessionStorage.getItem("makingNewStory") == "false") {
+        writers.push(writerVal)
+        console.log(writers);
+        replaceStory(sessionStorage.getItem("token"),languageVal,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,finished,cb2)
+      } else {
+        writers = []
+        writers.push(writerVal)
+        console.log(writers);
+        newStory(languageVal,sessionStorage.getItem("genre"),writers,sessionStorage.getItem("story"),newSummary,cb2)
+      }
+    }
     
   </script>
   </html>

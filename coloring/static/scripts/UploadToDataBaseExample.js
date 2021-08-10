@@ -139,7 +139,7 @@ function getAll() {
         console.log(response);
       });
 }
-function addLanguage(language_name) {
+function addLanguage(language_name, cb) {
     var settings = {
         "url": "http://localhost:8000/coloring/addLanguage",
         "method": "POST",
@@ -154,9 +154,10 @@ function addLanguage(language_name) {
       
       $.ajax(settings).done(function (response) {
         console.log(response);
+        cb();
       });
 }
-function getLanguage() {
+function getLanguage(cb) {
     var settings = {
         "url": "http://localhost:8000/coloring/getLanguage",
         "method": "GET",
@@ -164,6 +165,6 @@ function getLanguage() {
       };
       
       $.ajax(settings).done(function (response) {
-        console.log(response);
+        cb(response);
       });
 }
