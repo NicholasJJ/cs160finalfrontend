@@ -168,3 +168,15 @@ function getLanguage(cb) {
         cb(response);
       });
 }
+
+function eraseLanguage(cb) {
+    var settings = {
+        "url": "http://localhost:8000/coloring/eraseLanguage",
+        "method": "GET",
+        "timeout": 0,
+      };
+      
+      $.ajax(settings).done(function (response) {
+        cb(response);
+      });
+}
