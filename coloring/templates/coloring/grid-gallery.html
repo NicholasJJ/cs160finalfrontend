@@ -1,0 +1,134 @@
+<!-- {% load static %} -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gallery</title>
+	<script type="text/javascript" src="./../static/vendors/jquery/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./../static/vendors/bootstrap/css/bootstrap.css" />
+	<style type="text/css">
+		body {
+			background-image: url(./../static/images/bookshelfgrey.png);
+			background-repeat: repeat;
+			background-size: 16vw;
+		}
+		.fbook{
+
+			height: 80vh;
+			width: 130vw;
+			background-image: url(./../static/images/shelfcolor.png);
+			background-size: 100% 100%;
+			transform: translate(-10%, 0%);
+		}
+
+		.scroll{
+			position: relative;
+			background-image: url(./../static/images/bookcolor.png);
+			background-size: 100% 100%;
+			float: left;
+			pointer-events: auto;
+		}
+		.scroll:hover{
+			background-image: url(./../static/images/bookopencolor6.png);
+		}
+		#header{
+			width: 100%;
+			height: 10vh;
+			background-color: #D0D6CA;
+		}
+		#homebtn{
+			position: absolute;
+			top: 50%;
+			transform: translate(1vw,-50%);
+			width: 7vh;
+			height: 7vh;
+        	opacity: 0.7;
+			background-color: #b2b8ad;
+		}
+
+		#homebtn:hover {
+			background-color: #91998A;
+     	}
+
+		.parent {
+			position: absolute;
+			width: 100%;
+			pointer-events: none;
+		}
+	</style>
+</head>
+<body style="overflow-x: hidden; margin: 0 0 0 0">
+	<div class="containter-fluid">
+		<div id="header" class="row" style="margin: 0 0 0 0">
+			<div class="col-1" style="padding: 0 0 0 0;">
+				<input type="image" id="homebtn" src="/static/images/home_black_48dp.svg" onclick = "location.href = 'landing'"></input>
+			</div>
+			<div class="col-3"></div>
+			<div class="col-4">
+				<div style="text-align:center; margin: auto; font-size: 6.5vh;">Gallery</div>
+			</div>
+			<div class="col-4"></div>
+		</div>
+	</div>
+	<div id="parent">
+		<div class="fbook" style="visibility: hidden; height:13vh;">
+
+	</div>
+</body>
+<script>
+
+	var parent = document.getElementById("parent");
+	lowestF = 0;
+
+	function goToBook(bookNumber) {
+		alert($(bookNumber).attr("val"))
+	}
+
+	window.onload = function(event) {
+		console.log("HELLO");
+
+		newShelf("2vh", parent);
+		newShelf("2vh", parent);
+
+		console.log("HELLO");
+	}
+	window.onscroll = function(event) {
+		h = pageYOffset
+		foregroundChange = -h;
+		$("#parent").css("top", foregroundChange)
+		if (lowestF - h + foregroundChange < 20) {
+			//make new foreground book
+			marginBot = "2vh"
+			newShelf(marginBot, document.getElementById("parent"));
+			lowestF += $(".fbook").height() + parseInt(marginBot)
+		}
+	}
+	function newShelf(marginBot,parent) {
+		var newDiv = document.createElement("div")
+		newDiv.setAttribute("style", "margin-bottom: " + marginBot)
+		newDiv.setAttribute("class", "fbook")
+		t = $(newDiv).css("transform") + " translate(-10%,0%)";
+		$(newDiv).css("transform", t);
+		placeScroll(newDiv,"55%","10%","15vw","-15%");
+		placeScroll(newDiv,"55%","10%","30vw","-15%");
+		placeScroll(newDiv,"55%","10%","45vw","-15%");
+		placeScroll(newDiv,"55%","10%","60vw","-15%");
+		parent.appendChild(newDiv);
+	}
+
+	var bookCount = 0;
+	function placeScroll(div,height,width,left,top) {
+		var scroll = document.createElement("div");
+		scroll.setAttribute("class", "scroll");
+		var temp = bookCount
+		scroll.setAttribute("onclick", "goToBook(this)")
+		$(scroll).css("top",top);
+		$(scroll).css("left",left);
+		$(scroll).css("height",height);
+		$(scroll).css("width",width);
+		$(scroll).attr("val",bookCount)
+		div.appendChild(scroll);
+		bookCount += 1
+	}
+</script>
+</html>
