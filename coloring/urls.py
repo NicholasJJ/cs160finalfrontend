@@ -9,6 +9,7 @@ urlpatterns = [
     path('add_story', views.add_story, name='add_story'),
     path('write_summary', views.write_summary, name='write_summary'),
     path('view_book', views.view_book, name='view_book'),
+    path('view_book_v2', views.view_book_v2, name='view_book_v2'),
     path('testwrite', views.testwrite, name='testwrite'),
     path('landing', views.landing, name='landing'),
     path('landing_v2', views.landing_v2, name='landing_v2'),

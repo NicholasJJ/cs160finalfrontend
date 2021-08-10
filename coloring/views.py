@@ -18,6 +18,9 @@ def write_summary(request):
 def view_book(request):
     return render(request, 'coloring/view_book.html')
 
+def view_book_v2(request):
+    return render(request, 'coloring/view_book_v2.html')
+
 def testwrite(request):
     return render(request, 'coloring/testwrite.html')
 
