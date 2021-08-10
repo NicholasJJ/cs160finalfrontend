@@ -24,5 +24,6 @@ urlpatterns = [
     path('language', views.language, name='language'),
     path('getAll', BackendMySQL.getAll, name = "getAll"),
     path('addLanguage', BackendMySQL.addLanguage, name = "addLanguage"),
-    path('getLanguage', BackendMySQL.getLanguage, name="getLanguage")
+    path('getLanguage', BackendMySQL.getLanguage, name="getLanguage"),
+    path('eraseLanguage', BackendMySQL.eraseLanguage, name = "eraseLanguage")
 ]

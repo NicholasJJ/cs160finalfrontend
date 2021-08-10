@@ -341,3 +341,22 @@ def getLanguage(request):
         "msg":"Add Success",
         "list_of_language": result
     })
+
+@csrf_exempt
+def eraseLanguage(request):
+    print(request)
+    if request.method != 'GET':
+        return django.http.JsonResponse({
+        "result":-100,
+        "msg":"Parameter Wrong"
+    })
+    # WARNING: IT REQUIRE TO BE UNIQUE
+    db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
+    cursor = db.cursor()
+    cursor.execute("TRUNCATE Language")
+    db.commit()
+    db.close()
+    return django.http.JsonResponse({
+        "result":0,
+        "msg":"Truncate Success"
+    })
