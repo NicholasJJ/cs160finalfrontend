@@ -413,8 +413,8 @@
                       <option selected>Select-Language</option>
                     </select>
                   </div>
-                <h3> Language of Added Section: </h3>
-                <input type="text" class="modal-text" id="lang_new_language" name="lang"></input>
+                <h3 id = "NL"> Input New Language: </h3>
+                <input id = "NLI" type="text" class="modal-text" id="lang_new_language" name="lang"></input>
                 <h3> Did you end the story? </h3>
                 <label for="yes">
                   <input type="radio" class="radio" id="yes" name="end" value="Yes"><h4>Yes</h4>
@@ -437,6 +437,10 @@
   <script>
     writers = []
     window.onload = function(){
+      nl = document.getElementById("NL");
+      nli = document.getElementById("NLI");
+      $(nl).css("visibility", "hidden");
+      $(nli).css("visibility", "hidden");
       h = sessionStorage.getItem("story");
       s = document.getElementById("story");
       s.innerHTML = h;
@@ -470,8 +474,22 @@
       getLanguage(cbb);
     }
     
+    $("#languageDropdown").change(function (){
+      var lan = $("#languageDropdown").find(":selected").text();
+      console.log(lan);
+      nl = document.getElementById("NL");
+      nli = document.getElementById("NLI");
+      if (lan == "New-Language") {
+        $(nl).css("visibility", "visible");
+        $(nli).css("visibility", "visible");
+      } else {
+        $(nl).css("visibility", "hidden");
+        $(nli).css("visibility", "hidden");
+      }
+    })
 
     var allLanguages = [
+    "New-Language",
     "Arabic [العربية]",
     "Bengali [বাংলা]",
     "Chinese [中文]",
@@ -580,6 +598,10 @@
         inputLanguage = inputLanguage.split(/(\s+)/)[0];
         console.log(inputLanguage)
         if (inputLanguage == "Select-Language") {
+          alert("please select a language");
+          return
+        }
+        if (inputLanguage == "New-Language") {
           if (arr[0].value == "") {
             alert("Please specify the language you wrote in");
             return;
