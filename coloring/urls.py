@@ -4,12 +4,14 @@ from coloring import BackendMySQL
 
 urlpatterns = [
     path('gallery', views.gallery, name='gallery'),
+    path('grid_gallery', views.grid_gallery, name='grid_gallery'),
     path('preview', views.preview, name='preview'),
     path('add_story', views.add_story, name='add_story'),
     path('write_summary', views.write_summary, name='write_summary'),
     path('view_book', views.view_book, name='view_book'),
     path('testwrite', views.testwrite, name='testwrite'),
     path('landing', views.landing, name='landing'),
+    path('landing_v2', views.landing_v2, name='landing_v2'),
     path('genre', views.genre, name='genre'),
     path('instructions', views.instructions, name='instructions'),
     path('test_api', BackendMySQL.test_api, name='test_api'),
