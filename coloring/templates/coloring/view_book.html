@@ -34,20 +34,18 @@
         background-size: cover;
       }
 
-      input {
-        border-radius: 10px;
-      }
-
 			h1 {
         font-family: "Raleway";
-        font-size: 26px;
+				font-size: 3.3vh;
+      	text-align: center;
         font-weight: 500;
         color: #1b1211;
+				margin-top: 0.5vh;
       }
 
       h2 {
         font-family: "Raleway";
-        font-size: 20px;
+        font-size: 2.05vh;
         font-weight: 500;
         color: #1b1211;
       }
@@ -75,8 +73,8 @@
 				background-color: #b9b9ae;
 				border: 1px solid #4e643e;
 				border-radius: 2px;
-				padding-top: 6px;
-				padding-bottom: 2px;
+				padding-top: 8px;
+				padding-bottom: 4px;
 				width: 678px;
 				text-align: center;
 			}
@@ -85,41 +83,40 @@
 				background-color: #D4D4CF;
 			}
 
-			.label-bar {
-				margin-top: -50px;
-				text-align: center;
-				width: 100%;
-				background-color: #d0d6ca;
-				box-shadow: 0 2px 6px -1px #b2b8ad;
-			}
-
-      #top-bar {
-        width: 100%;
-        background-color: #d0d6ca;
-
-      }
-
-			.labels {
-				padding-top: 3px;
-				padding-bottom: 2px;
-				text-align: center;
-				display: inline-block;
-				margin-bottom: 7px;
-			}
-
-      #back {
-        width: 32px;
-        height: 32px;
-        margin-top: 18px;
-        margin-left: 20px;
-        margin-bottom: 10px;
-        opacity: 0.7;
+			/* Back icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aarrow_back%3A */
+			#back{
+				position: absolute;
+				top: 50%;
+				transform: translate(0.9vw,-50%);
+				width: 4vh;
+				height: 4vh;
+		    text-align: center;
+		    background-image: url("/static/images/arrow_back_black_48dp.svg");
+		    background-position: center;
+		    background-repeat: no-repeat;
+				background-size: contain;
+				opacity: 0.7;
 				background-color: #b2b8ad;
-      }
+				border: 1px hidden;
+				text-align: center;
+				border-radius: 10px;
+				z-index: 1;
+			}
 
-      #back:hover {
-				background-color: #91998A;
-      }
+		  #back:hover {
+		    background-color: #91998A;
+		    opacity: 0.7;
+		    background-image: url("/static/images/arrow_back_black_48dp.svg");
+		    background-position: center;
+		    background-repeat: no-repeat;
+				background-size: contain;
+				z-index: 1;
+		  }
+
+			#back:focus {
+				outline: none;
+				border: 1px solid #524b47;
+		  }
 
 			#story {
         width: 750px;
@@ -134,6 +131,10 @@
         padding-right: 52px;
         padding-bottom: 42px;
         text-align: left;
+				font-family: "Mulish";
+        font-size: 18px;
+        font-weight: 400;
+        color: #1b1211;
 			}
 
 			#content {
@@ -179,7 +180,10 @@
         padding-right: 52px;
         padding-bottom: 42px;
         text-align: left;
-        overflow-y: auto;
+				font-family: "Mulish";
+        font-size: 18px;
+        font-weight: 400;
+        color: #1b1211;
       }
 
       .modal {
@@ -202,16 +206,6 @@
         padding-bottom: 18px;
       }
 
-      #close {
-        width: 32px;
-        height: 32px;
-        margin-top: 18px;
-        margin-left: 20px;
-        margin-bottom: 10px;
-        opacity: 0.7;
-        background-color: #b2b8ad;
-      }
-
       #summary-title {
         text-align: center;
       }
@@ -227,6 +221,10 @@
         margin-top: 10px;
         margin-bottom: 20px;
         padding: 24px;
+				font-family: "Mulish";
+        font-size: 18px;
+        font-weight: 400;
+        color: #1b1211;
       }
 
       #modal-bar {
@@ -237,20 +235,59 @@
         margin: 0 0 0 0;
       }
 
+			#authors {
+				font-size: 2.15vh;
+			}
+
+			/* Close icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aclose%3A */
+			.close-2 {
+				width: 3.5vh;
+				height: 3.5vh;
+		    text-align: center;
+		    background-image: url("/static/images/close_black_48dp.svg");
+		    background-position: center;
+		    background-repeat: no-repeat;
+				background-size: contain;
+				opacity: 0.7;
+				background-color: #b2b8ad;
+				border: 1px hidden;
+				text-align: center;
+				border-radius: 10px;
+				margin-top: 18px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+				z-index: 1;
+			}
+
+		  .close-2:hover {
+		    background-color: #91998A;
+		    opacity: 0.7;
+		    background-image: url("/static/images/close_black_48dp.svg");
+		    background-position: center;
+		    background-repeat: no-repeat;
+				background-size: contain;
+				z-index: 1;
+		  }
+
+			.close-2:focus {
+				outline: none;
+				border: 1px solid #524b47;
+		  }
+
     </style>
   </head>
 
   <body>
-		<div id="top-bar">
-			<!-- Back icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aarrow_back%3A -->
-			<input type="image" id="back" src="/static/images/arrow_back_black_48dp.svg"></input>
-      <div class="label-bar">
-        <div id="button-bar">
+		<div class="container-fluid">
+			<div class="row align-items-center justify-content-center" style="height: 7vh; background-color: #D0D6CA; box-shadow: 0 2px 6px -1px #b2b8ad;">
+      <div class = "col-2">
+          <button id="back"></button>
+      </div>
+      <div class="col-8" id="title">
           <h1>View Story</h1>
-        </div>
-		  </div>
-		</div>
-
+      </div>
+      <div class="col-2"></div>
+    </div>
     <div class = "row align-items-center justify-content-center" style = "padding-top: 2vh">
       <button id="summary">
         <h2>Story Summary</h2>
@@ -262,19 +299,18 @@
       <div id="story" class="ql-editor" data-gramm="false" contenteditable="false" spellcheck="false"></div>
     </div>
     <div id="header" style = "padding-left: 10vw">
-      <h2>Contributors</h2>
+      <h2 id="authors">Contributors</h2>
     </div>
     <div id="footer">
-      <div id="contributors" style = "text-align: center">
-
+      <div id="contributors" style = "text-align: center"></div>
       </div>
     </div>
+
 
       <div class="modal" id="confirmation">
         <div class="modal-content">
         <div id="modal-bar">
-          <!-- Close icon source: Google Material Icons - https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aclose%3A -->
-          <input type="image" id="close" src="/static/images/close_black_48dp.svg"></input>
+          <button class="close-2" id="close"></button>
          </div>
          <div id="summary-title">
           <h2> Story Summary </h2>

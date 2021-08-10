@@ -74,11 +74,13 @@
 		    background-image: url("/static/images/arrow_back_black_48dp.svg");
 		    background-position: center;
 		    background-repeat: no-repeat;
+				background-size: contain;
 				opacity: 0.7;
 				background-color: #b2b8ad;
 				border: 1px hidden;
 				text-align: center;
 				border-radius: 10px;
+				z-index: 1;
 			}
 
 		  #back:hover {
@@ -87,6 +89,8 @@
 		    background-image: url("/static/images/arrow_back_black_48dp.svg");
 		    background-position: center;
 		    background-repeat: no-repeat;
+				background-size: contain;
+				z-index: 1;
 		  }
 
 			#back:focus {
@@ -132,7 +136,7 @@
 		<div class="container-fluid">
     <div class="row align-items-center justify-content-center" style="height: 7.9vh; background-color: #D0D6CA; box-shadow: 0 2px 6px -1px #b2b8ad;">
       <div class = "col-2">
-          <button id="back" onclick="location.href = 'genre'"></button>
+          <button id="back"></button>
       </div>
       <div class="col-8" id="title">
           <h1>Language &nbsp&nbsp/&nbsp&nbsp Genre</h1>

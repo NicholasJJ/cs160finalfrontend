@@ -83,12 +83,14 @@
 		position: absolute;
 		top: 50%;
 		transform: translate(1.6vw,-50%);
-		width: 5vh;
-		height: 5vh;
+		width: 4vh;
+		height: 4vh;
     text-align: center;
     background-image: url("/static/images/home_black_48dp.svg");
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 1;
 	}
 
   #homebtn:hover {
@@ -97,6 +99,8 @@
     background-image: url("/static/images/home_black_48dp.svg");
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 1;
   }
 
   #title {
@@ -123,7 +127,7 @@
     <div class="containter-fluid" >
 		<div id="header" class="row" style="margin: 0 0 0 0">
 			<div class="col-1" style="padding: 0 0 0 0;">
-				<button id="homebtn" onclick="location.href = 'landing'"></button>
+				<button id="homebtn"></button>
 			</div>
 			<div class="col-3"></div>
 			<div class="col-4">
@@ -186,6 +190,10 @@
 </body>
 
 <script>
+
+  $("#homebtn").click(function() {
+    location.href = "landing";
+  });
 
 </script>
 </html>
