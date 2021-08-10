@@ -118,7 +118,7 @@
         color: #1b1211;
 			}
 
-			#button-bar {
+			.button-bar {
 				margin-top: 10px;
 				padding-bottom: 10px;
 				text-align: center;
@@ -149,8 +149,8 @@
 			<img src="/static/images/scroll-top.png" width="832px" height="38px">
 			<div id="story" class="ql-editor" data-gramm="false" contenteditable="false" spellcheck="false"></div>
 			</div>
-		<div id="button-bar" style="margin-bottom: 0%;"><button id="continue"><h2>Continue Story</h2></button></div>
-    <div id="button-bar" style="margin-top: 0%;"><button id="new"><h2>Create New Story from Scratch</h2></button></div>
+		<div id = "addBtn" class="button-bar" style="margin-bottom: 0%;"><button id="continue"><h2>Continue Story</h2></button></div>
+    <div id = "newBtn" class="button-bar" style="margin-top: 0%;"><button id="new"><h2>Create New Story from Scratch</h2></button></div>
   </body>
 
   <script>
@@ -161,8 +161,11 @@
       if (token != -1) {
         getStory(token,cb);
       } else {
-        s = document.getElementById("story");
-        s.innerHTML = "<b> NO STORY FOUND, PLEASE MAKE A NEW ONE <b>"
+        // s = document.getElementById("story");
+        // s.innerHTML = "<b> NO STORY FOUND, PLEASE MAKE A NEW ONE <b>"
+        document.getElementById("scroll-top").remove();
+        document.getElementById("addBtn").remove();
+        $("#newBtn").css("margin-top","3vh")
         sessionStorage.setItem("oldstory", "");
         sessionStorage.setItem("oldsummary", "");
         console.log("DONE!");

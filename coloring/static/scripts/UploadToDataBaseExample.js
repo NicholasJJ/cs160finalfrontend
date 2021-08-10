@@ -158,6 +158,7 @@ function addLanguage(language_name, cb) {
       });
 }
 function getLanguage(cb) {
+  console.log("in language function");
     var settings = {
         "url": "http://localhost:8000/coloring/getLanguage",
         "method": "GET",
@@ -165,6 +166,8 @@ function getLanguage(cb) {
       };
       
       $.ajax(settings).done(function (response) {
+        console.log(cb);
         cb(response);
+        console.log("called back");
       });
 }

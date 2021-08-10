@@ -401,7 +401,6 @@
           <div id="button-bar"><button id="save"><h2>Save Summary</h2></button></div>
         </div>
 
-          <!-- modal without new language-->
           <div class="modal" id="confirmation">
             <div class="modal-content">
               <div id="modal-bar">
@@ -445,21 +444,32 @@
       sum = document.getElementById("summary-box");
       sum.innerHTML = summary;
       if (sessionStorage.getItem("makingNewStory") == "false") {
+        console.log("getting writers");
         getWriters(sessionStorage.getItem("token"),cb)
+      } else {
+        console.log("getting languages");
+        getLanguage(cbb);
       }
-
+    }
+    function cbb(response){
+      console.log("got languages");
+      console.log(response.list_of_language);
+      response.list_of_language.forEach(function(value,index){allLanguages.push(value)});
+      console.log("DONE!");
       languageDropdown();
     }
     function cb(wret) {
+      console.log("got writers");
       writers = wret;
       
-      getLanguage(cb2);
+      if (writers == -1){
+        writers = []
+      }
+      console.log(writers);
+      console.log("getting languages");
+      getLanguage(cbb);
     }
-    function cb2(response){
-      console.log(response.list_of_language);
-      response.list_of_language.forEach(function(value,index){allLanguages.set(value,value)});
-      console.log("DONE!");
-    }
+    
 
     var allLanguages = [
     "Arabic [العربية]",
@@ -484,6 +494,8 @@
     "Urdu [اُردُو]",
     "Vietnamese [tiếng Việt]"
     ];
+
+    
 
     function languageDropdown() {
       var languageDropdown = document.getElementById("languageDropdown");
@@ -550,7 +562,7 @@
     }
     function cb2(){
       getAll()
-      // location.href = "landing";
+      location.href = "landing";
     }
     finishedVal = ""
     languageVal = ""
