@@ -323,7 +323,7 @@
 
   <script>
   // experiment boolean - set to true if conducting the experiments
-  var experiment = true;
+  var experiment = false;
 
   writtenStory = ""
   writtenSummary = ""
@@ -334,6 +334,7 @@
       writtenSummary = "This is the summary"
       writtenWriters = "Alice.Bob.Carol"
     } else {
+      getAll();
       writtenStory = sessionStorage.getItem("viewStory");
       writtenSummary = sessionStorage.getItem("viewSummary");
       writtenWriters = sessionStorage.getItem("viewWriters");

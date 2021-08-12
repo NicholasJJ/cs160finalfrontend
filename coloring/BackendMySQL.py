@@ -257,7 +257,7 @@ def getTokenGallery(request):
     })
     db = MySQLdb.connect("w3.zhangxinran.net", "root", "mysql#1357924680aA", "UserInformation", charset='utf8' )
     cursor = db.cursor()
-    req = "SELECT Article_ID FROM UserInformation.Ariticle_Storage where Finished = '1'"
+    req = "SELECT Article_ID FROM UserInformation.Ariticle_Storage where Finished = '1' order by RAND() limit 1"
     cursor.execute(req)
     data = cursor.fetchall()
     if (data == None) :
